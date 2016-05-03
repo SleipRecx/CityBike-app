@@ -9,6 +9,9 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import CoreLocation
+
+
 
 extension String {
     var boolValue: Bool {
@@ -17,35 +20,8 @@ extension String {
 
 class TableViewController: UITableViewController, UISearchResultsUpdating  {
     
-    class BikePlace {
-        var availableBikes: Int
-        var availableSlots: Int
-        var adress: String
-        var online: Bool
-        var description: String
-        var longitude: Double
-        var latitude: Double
-       
-        init(availableBikes: Int,  availableSlots: Int, adress: String, online: Bool, longitude: Double, latitude: Double ){
-            self.availableBikes = availableBikes
-            self.availableSlots = availableSlots
-            self.description = adress.substringFromIndex(adress.startIndex.advancedBy(3))
-            self.adress = adress.substringFromIndex(adress.startIndex.advancedBy(3)).componentsSeparatedByString(",")[0]
-            self.adress = self.adress.componentsSeparatedByString("/")[0]
-            self.adress = self.adress.componentsSeparatedByString("(")[0]
-            self.online = online
-            self.longitude = longitude
-            self.latitude = latitude
-           
-        }
-        
-        func getDisplayString() -> String{
-            let result: String = self.adress
-            return result
-        }
-        
-    }
-
+    
+    
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         self.filteredPlaces =  self.places.filter {place -> Bool in
@@ -72,10 +48,12 @@ class TableViewController: UITableViewController, UISearchResultsUpdating  {
                         let online:Bool =  place["Online"].boolValue
                         let longitude: Double = place["Longitude"].doubleValue
                         let latitude: Double = place["Latitude"].doubleValue
-                
-                        let object = BikePlace(availableBikes: place["AvailableBikeCount"].intValue,availableSlots: place["AvailableSlotCount"].intValue,adress: place["Address"].stringValue,online: online,longitude: longitude,latitude: latitude)
+                        let loc = CLLocation(latitude: latitude, longitude: longitude)
+                        let distance = self.calculateDistanceBetweenTwoLocations(self.locationManager.location!, destination: loc)
+                        let object = BikePlace(availableBikes: place["AvailableBikeCount"].intValue,availableSlots: place["AvailableSlotCount"].intValue,adress: place["Address"].stringValue,online: online,longitude: longitude,latitude: latitude, distance: distance)
                         self.places.append(object)
                     }
+                    self.places.sortInPlace({ $0.distance < $1.distance })
                     self.tableView.reloadData()
                 }
             case .Failure(let error):
@@ -121,13 +99,18 @@ class TableViewController: UITableViewController, UISearchResultsUpdating  {
             secondViewController.availableSlots = place.availableSlots
             secondViewController.online = place.online
         }
-        
+        else{
+            let chill = segue.destinationViewController as! MapViewController
+            chill.places = self.places
+        }
     
     }
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.resultController.tableView.dataSource = self
+      
+               self.resultController.tableView.dataSource = self
         self.resultController.tableView.delegate = self
         self.searchController = UISearchController(searchResultsController: self.resultController)
         self.refreshControl = self.refreshController
@@ -137,10 +120,20 @@ class TableViewController: UITableViewController, UISearchResultsUpdating  {
         self.searchController.searchBar.barTintColor = UIColor(red: 160/255, green: 30/255, blue: 34/255, alpha: 1.0)
         definesPresentationContext = true
         fetchJSON()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         searchController.active = false
+    }
+    
+  
+    
+    func calculateDistanceBetweenTwoLocations(source:CLLocation,destination:CLLocation) -> Int{
+        let distanceMeters = source.distanceFromLocation(destination)
+        let inted = Int(distanceMeters)
+        return inted
+        
     }
     
     
@@ -178,11 +171,11 @@ class TableViewController: UITableViewController, UISearchResultsUpdating  {
         cell.selectedBackgroundView = bgColorView
         if tableView == self.tableView{
             cell.textLabel?.text = self.places[indexPath.row].getDisplayString()
-            cell.detailTextLabel?.text = String(self.places[indexPath.row].availableBikes) + " sykler, " + String(self.places[indexPath.row].availableSlots) + " låser"
+            cell.detailTextLabel?.text = String(self.places[indexPath.row].distance) + " Meter, " + String(self.places[indexPath.row].availableBikes) + " Sykler"
         }
         else{
             cell.textLabel?.text = self.filteredPlaces[indexPath.row].getDisplayString()
-        }
+            cell.detailTextLabel?.text = String(self.filteredPlaces[indexPath.row].distance) + " Meter, " + String(self.filteredPlaces[indexPath.row].availableBikes) + " Sykler"        }
 
         
         return cell
