@@ -14,8 +14,11 @@ class BikePlace {
     var adress: String
     var online: Bool
     var description: String
+    var longitude: Double
+    var latitude: Double
+    var distance: Int
     
-    init(availableBikes: Int,  availableSlots: Int, adress: String, online: Bool ){
+    init(availableBikes: Int,  availableSlots: Int, adress: String, online: Bool, longitude: Double, latitude: Double, distance: Int ){
         self.availableBikes = availableBikes
         self.availableSlots = availableSlots
         self.description = adress.substringFromIndex(adress.startIndex.advancedBy(3))
@@ -23,6 +26,9 @@ class BikePlace {
         self.adress = self.adress.componentsSeparatedByString("/")[0]
         self.adress = self.adress.componentsSeparatedByString("(")[0]
         self.online = online
+        self.longitude = longitude
+        self.latitude = latitude
+        self.distance = distance
         
     }
     
