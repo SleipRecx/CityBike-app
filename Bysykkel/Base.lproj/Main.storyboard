@@ -8,7 +8,6 @@
         <!--Kart-->
         <scene sceneID="obB-nL-odY">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ghe-0T-5UW" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="WkO-CW-PgN" customClass="MapViewController" customModule="Bysykkel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nTE-DV-gvs"/>
@@ -39,6 +38,7 @@
                         <outlet property="map" destination="mUR-nD-lmZ" id="Zvb-Xz-Bfc"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ghe-0T-5UW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1576.5" y="-476.5"/>
         </scene>
