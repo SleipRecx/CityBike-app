@@ -1,4 +1,5 @@
-# CityBike-app
+# CityBike App
+An App to locate city bikes in Trondheim
 
 ![alt tag](http://puu.sh/oEJyC/17284aa18c.png)
 
