@@ -81,34 +81,33 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="xQX-2E-zfj"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="map" destination="Rq4-bb-jY7" id="4v1-8d-uox"/>
-                        <segue destination="IYn-4e-poO" kind="show" identifier="mySegue2" id="zm1-Gg-ob8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wkT-tg-xj7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1580.5" y="285.5"/>
+            <point key="canvasLocation" x="1576.5" y="285.5"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="60N-X7-2qF">
+        <!--GLKit View Controller-->
+        <scene sceneID="g8e-ri-AUz">
             <objects>
-                <viewController id="IYn-4e-poO" sceneMemberID="viewController">
+                <glkViewController preferredFramesPerSecond="30" id="CyV-He-FRm" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Nry-5j-rln"/>
-                        <viewControllerLayoutGuide type="bottom" id="5Qp-B9-Gqf"/>
+                        <viewControllerLayoutGuide type="top" id="Qd2-mh-abw"/>
+                        <viewControllerLayoutGuide type="bottom" id="2iu-IS-2JN"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Y20-kq-6nf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <glkView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" enableSetNeedsDisplay="NO" id="I6t-XP-lOi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aKg-e5-UvQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <connections>
+                            <outlet property="delegate" destination="CyV-He-FRm" id="jKj-RN-yEb"/>
+                        </connections>
+                    </glkView>
+                </glkViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4eZ-i3-2P0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2022.5" y="274.5"/>
+            <point key="canvasLocation" x="2147" y="183"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fV5-p0-b6y">

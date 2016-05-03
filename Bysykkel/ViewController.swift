@@ -40,7 +40,7 @@ class ViewController: UIViewController {
             annotation.title = "Stengt"
         }
         
-        annotation.subtitle = "Sykler: " + String(availableSlots) + " Låser: " + String(availableSlots)
+        annotation.subtitle = "Sykler: " + String(availableBikes) + " Låser: " + String(availableSlots)
         map.addAnnotation(annotation)
         let span = MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007)
         let region = MKCoordinateRegion(center: location, span:  span)
