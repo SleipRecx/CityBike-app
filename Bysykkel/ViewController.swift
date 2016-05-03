@@ -27,7 +27,6 @@ class ViewController: UIViewController {
 
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude )
@@ -46,7 +45,7 @@ class ViewController: UIViewController {
         let region = MKCoordinateRegion(center: location, span:  span)
         map.setRegion(region, animated: true)
         map.selectAnnotation(map.annotations[0], animated: true)
-         self.map.showsUserLocation = true
+        self.map.showsUserLocation = true
         self.navigationItem.title = adress;
     }
 
