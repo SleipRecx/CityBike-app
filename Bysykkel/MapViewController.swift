@@ -42,9 +42,9 @@ class MapViewController: UIViewController {
     
     func populateMap(){
         for place in places{
-            let location = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+            let location = place.location
             let annotation = MKPointAnnotation()
-            annotation.coordinate = location
+            annotation.coordinate = location.coordinate
             annotation.title = place.adress
             annotation.subtitle = "Sykler: " + String(place.availableBikes) + " Låser: " + String(place.availableSlots)
             map.addAnnotation(annotation)
@@ -66,7 +66,8 @@ class MapViewController: UIViewController {
                         let online:Bool =  place["Online"].boolValue
                         let longitude: Double = place["Longitude"].doubleValue
                         let latitude: Double = place["Latitude"].doubleValue
-                        self.places.append(BikePlace(availableBikes: place["AvailableBikeCount"].intValue,availableSlots: place["AvailableSlotCount"].intValue,adress: place["Address"].stringValue,online: online,longitude: longitude,latitude: latitude, distance: 0))
+                        let location = CLLocation(latitude: latitude, longitude: longitude)
+                        self.places.append(BikePlace(availableBikes: place["AvailableBikeCount"].intValue,availableSlots: place["AvailableSlotCount"].intValue,adress: place["Address"].stringValue,online: online, location: location, distance: 0))
                     }
                     self.populateMap()
                     
