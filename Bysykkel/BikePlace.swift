@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-class BikePlace {
+class BikePlace : Equatable {
     var availableBikes: Int
     var availableSlots: Int
     var adress: String
@@ -17,8 +17,10 @@ class BikePlace {
     var description: String
     var distance: Int
     var location: CLLocation
+    var id: Int
     
     init(availableBikes: Int,  availableSlots: Int, adress: String, online: Bool, location: CLLocation, distance: Int ){
+        self.id = Int(adress.componentsSeparatedByString("-")[0])!
         self.availableBikes = availableBikes
         self.availableSlots = availableSlots
         self.description = adress.substringFromIndex(adress.startIndex.advancedBy(3))
@@ -31,8 +33,15 @@ class BikePlace {
     }
     
     func getDisplayString() -> String{
-        let result: String = self.adress
-        return result
+        return self.adress
     }
     
+    func getID()->Int{
+        return self.id
+    }
+    
+}
+
+func ==(lhs: BikePlace, rhs: BikePlace) -> Bool{
+    return lhs.getID() == rhs.getID()
 }
