@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15A278b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NlC-tC-HPk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A278b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NlC-tC-HPk">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -42,7 +42,7 @@
             </objects>
             <point key="canvasLocation" x="1576.5" y="-476.5"/>
         </scene>
-        <!--Bysykkel Oversikt-->
+        <!--Table View Controller-->
         <scene sceneID="lUh-dD-2Fa">
             <objects>
                 <tableViewController id="JNc-GE-zgN" customClass="TableViewController" customModule="Bysykkel" customModuleProvider="target" sceneMemberID="viewController">
@@ -61,13 +61,13 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bakke bro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PuK-Bm-kpF">
                                             <rect key="frame" x="38" y="8" width="228" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="153 Meter - Sykler: 7, Stativer: 9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnP-Hh-bDp">
                                             <rect key="frame" x="38" y="27" width="279" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sih-eG-10k">
@@ -85,152 +85,33 @@
                                     <segue destination="2Jr-zA-uN4" kind="show" identifier="mySegue" id="N6K-4f-NLR"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="51" id="QMo-es-oT9" customClass="CustomCell" customModule="Bysykkel" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="143" width="375" height="51"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QMo-es-oT9" id="IbA-PL-tuc">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Prinsen Kinosenter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOF-UZ-25Z">
-                                            <rect key="frame" x="38" y="8" width="228" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="817 Meter - Sykler: 3, Stativer: 5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TsW-za-VEF">
-                                            <rect key="frame" x="38" y="27" width="279" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NAZ-Bc-z46">
-                                            <rect key="frame" x="14" y="22" width="10" height="10"/>
-                                            <color key="backgroundColor" red="0.049881784540000002" green="0.7216796875" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="tintColor" red="0.050980392159999999" green="0.72156862749999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </imageView>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <outlet property="img" destination="NAZ-Bc-z46" id="J06-e8-vb6"/>
-                                    <outlet property="one" destination="QOF-UZ-25Z" id="2Aw-1t-T1W"/>
-                                    <outlet property="two" destination="TsW-za-VEF" id="cMh-CD-Ct6"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="51" id="XZ7-hJ-dOc" customClass="CustomCell" customModule="Bysykkel" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="194" width="375" height="51"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XZ7-hJ-dOc" id="tY0-VL-wce">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bakke bro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxQ-xB-yWo">
-                                            <rect key="frame" x="38" y="8" width="228" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="153 Meter - Sykler: 7, Stativer: 9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNB-YV-i62">
-                                            <rect key="frame" x="38" y="27" width="279" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReJ-tm-m5R">
-                                            <rect key="frame" x="14" y="22" width="10" height="10"/>
-                                            <color key="backgroundColor" red="0.049881784540000002" green="0.7216796875" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="tintColor" red="0.050980392159999999" green="0.72156862749999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </imageView>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <outlet property="img" destination="ReJ-tm-m5R" id="zJG-Wr-M7J"/>
-                                    <outlet property="one" destination="fxQ-xB-yWo" id="kn4-0V-7ZV"/>
-                                    <outlet property="two" destination="wNB-YV-i62" id="HsS-55-45h"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="51" id="HEp-pe-byx" customClass="CustomCell" customModule="Bysykkel" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="245" width="375" height="51"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HEp-pe-byx" id="nqw-xo-NdE">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bakke bro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OtE-AJ-8yf">
-                                            <rect key="frame" x="38" y="8" width="228" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="153 Meter - Sykler: 7, Stativer: 9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUZ-4n-Xeu">
-                                            <rect key="frame" x="38" y="27" width="279" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P4u-FB-X3h">
-                                            <rect key="frame" x="14" y="22" width="10" height="10"/>
-                                            <color key="backgroundColor" red="0.049881784540000002" green="0.7216796875" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="tintColor" red="0.050980392159999999" green="0.72156862749999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </imageView>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <outlet property="img" destination="P4u-FB-X3h" id="20f-fU-vYc"/>
-                                    <outlet property="one" destination="OtE-AJ-8yf" id="JeI-9f-xmd"/>
-                                    <outlet property="two" destination="aUZ-4n-Xeu" id="yZP-yU-rTx"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="51" id="AZH-Le-peg" customClass="CustomCell" customModule="Bysykkel" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="296" width="375" height="51"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AZH-Le-peg" id="vXT-WH-aKX">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bakke bro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKw-H4-5Rx">
-                                            <rect key="frame" x="38" y="8" width="228" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="153 Meter - Sykler: 7, Stativer: 9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeT-rL-T08">
-                                            <rect key="frame" x="38" y="27" width="279" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Mg-QN-C9a">
-                                            <rect key="frame" x="14" y="22" width="10" height="10"/>
-                                            <color key="backgroundColor" red="0.049881784540000002" green="0.7216796875" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="tintColor" red="0.050980392159999999" green="0.72156862749999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </imageView>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <outlet property="img" destination="0Mg-QN-C9a" id="wgv-nk-O3K"/>
-                                    <outlet property="one" destination="rKw-H4-5Rx" id="uEa-QX-aBW"/>
-                                    <outlet property="two" destination="CeT-rL-T08" id="06H-8a-vQo"/>
-                                </connections>
-                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="JNc-GE-zgN" id="vmx-i3-CuD"/>
                             <outlet property="delegate" destination="JNc-GE-zgN" id="wPG-v6-Ht9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Bysykkel Oversikt" id="yV4-kK-L1M">
+                    <navigationItem key="navigationItem" id="yV4-kK-L1M">
+                        <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title="Back" id="Pkp-N3-v8o"/>
-                        <barButtonItem key="leftBarButtonItem" image="Image" id="tl1-w3-7Ll">
+                        <barButtonItem key="leftBarButtonItem" image="map" id="tl1-w3-7Ll">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="WkO-CW-PgN" kind="show" id="v8X-h7-ilJ"/>
                             </connections>
                         </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" id="MRl-oe-ocJ">
+                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Alle"/>
+                                <segment title="Favoritter"/>
+                            </segments>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="mySegmentedControlPressed:" destination="JNc-GE-zgN" eventType="valueChanged" id="6bV-kw-ebf"/>
+                            </connections>
+                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="7eM-Ur-cfa">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -238,10 +119,19 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="barPosition">
+                            <integer key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="mySegmentedControl" destination="MRl-oe-ocJ" id="ReL-30-oG6"/>
+                        <outlet property="searchButton" destination="7eM-Ur-cfa" id="Q8L-7O-J5t"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lfO-Bp-TMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1083.5" y="285.5"/>
+            <point key="canvasLocation" x="1081.5" y="292.5"/>
         </scene>
         <!--Stednavn-->
         <scene sceneID="sUZ-hQ-gfQ">
@@ -285,6 +175,11 @@
                             <color key="textShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
                         </textAttributes>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="barPosition">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -297,6 +192,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="24" height="24"/>
+        <image name="map" width="26" height="30"/>
     </resources>
 </document>
