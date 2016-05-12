@@ -16,11 +16,16 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     var searchController : UISearchController!
     var refreshController = UIRefreshControl()
     var resultController = UITableViewController()
+    let locationManager = CLLocationManager()
     
+    @IBOutlet weak var mySegmentedControl: UISegmentedControl!
+    @IBOutlet weak var searchButton: UIBarButtonItem!
+   
     var places: [BikePlace] = []
     var filteredPlaces: [BikePlace] = []
+    var favorites: [BikePlace] = []
+    var favoritesID: [Int] = []
 
-    let locationManager = CLLocationManager()
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -45,8 +50,6 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
                fetchJSON()
             }
         }
-        self.tableView.setContentOffset(CGPointZero, animated:true)
-    
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -64,9 +67,7 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
        func fetchJSON(){
         let API_URL: String = "http://map.webservice.sharebike.com:8888/json/MapService/LiveStationData?APIKey=" +
         "3EFC0CF3-4E99-40E2-9E42-B95C2EDE6C3C&SystemID=citytrondheim"
-        
         let myLocation = locationManager.location!
-   
         Alamofire.request(.GET, API_URL).validate().responseJSON { response in
             switch response.result {
             case .Success:
@@ -81,8 +82,13 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
                         let distance = Int((myLocation.distanceFromLocation(location)))
                         let object = BikePlace(availableBikes: place["AvailableBikeCount"].intValue,availableSlots: place["AvailableSlotCount"].intValue,adress: place["Address"].stringValue,online: online,location: location, distance: distance)
                         self.places.append(object)
+                        if(self.favoritesID.contains(Int(place["Address"].stringValue.componentsSeparatedByString("-")[0])!)){
+                            self.favorites.append(object)
+                        }
+
                     }
                     self.places.sortInPlace({$0.distance < $1.distance})
+                    self.favorites.sortInPlace({$0.distance < $1.distance})
                     self.tableView.reloadData()
                 }
             case
@@ -91,101 +97,6 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
             }
         }
         
-    }
-    
-    
-   
-    
-    func refreshTable(){
-        self.refreshControl?.beginRefreshing()
-        self.places.removeAll()
-        self.filteredPlaces.removeAll()
-        fetchJSON()
-        self.tableView.reloadData()
-        self.refreshController.endRefreshing()
-    }
-    
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.tableView{
-            return self.places.count
-        }
-        else{
-            return self.filteredPlaces.count
-        }
-        
-    }
-
-  
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:CustomCell = self.tableView.dequeueReusableCellWithIdentifier("myCell")! as! CustomCell
-        let hour = NSCalendar.currentCalendar().component(.Hour, fromDate: NSDate())
-        tableView.rowHeight = 51
-        if tableView == self.tableView{
-            cell.one.text = self.places[indexPath.row].getDisplayString()
-            if hour < 6{
-                cell.one.text = self.places[indexPath.row].getDisplayString() + " [Stengt]"
-
-            }
-            cell.two.text = String(self.places[indexPath.row].distance) +
-                " Meter"  + " - Stativer: " + String(self.places[indexPath.row].availableSlots) +  " - Sykler: " + String(self.places[indexPath.row].availableBikes)
-            if(self.places[indexPath.row].distance > 10000){
-                cell.two.text = String(self.places[indexPath.row].distance/1000) +
-                    " Kilometer"  + " - Stativer: " + String(self.places[indexPath.row].availableSlots) +  " - Sykler: " + String(self.places[indexPath.row].availableBikes)
-            }
-            if(self.places[indexPath.row].availableBikes == 0){
-                cell.img.backgroundColor =  UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
-            }
-            else if(self.places[indexPath.row].availableSlots == 0){
-                cell.img.backgroundColor =  UIColor.grayColor()
-            }
-            else if (self.places[indexPath.row].availableBikes < 5){
-                cell.img.backgroundColor =  UIColor(red: 251/255, green: 188/255, blue: 5/255, alpha: 1)
-            }
-            else{
-                cell.img.backgroundColor =  UIColor(red: 52/255, green: 168/255, blue: 83/255, alpha: 1)
-            }
-            cell.displayString = self.places[indexPath.row].getDisplayString()
-        }
-        else{
-            
-            cell.one.text = self.filteredPlaces[indexPath.row].getDisplayString()
-            if hour < 6{
-                cell.one.text = self.filteredPlaces[indexPath.row].getDisplayString() + " [Stengt]"
-                
-            }
-            cell.two.text = String(self.filteredPlaces[indexPath.row].distance) +
-                " Meter" + " - Stativer: " + String(self.filteredPlaces[indexPath.row].availableSlots) + " - Sykler: " + String(self.filteredPlaces[indexPath.row].availableBikes)
-            if(self.filteredPlaces[indexPath.row].distance > 10000){
-                cell.two.text = String(self.filteredPlaces[indexPath.row].distance/1000) +
-                    " Kilometer" + " - Stativer: " + String(self.filteredPlaces[indexPath.row].availableSlots) + " - Sykler: " + String(self.filteredPlaces[indexPath.row].availableBikes)
-            }
-
-            if(self.filteredPlaces[indexPath.row].availableBikes == 0){
-                cell.img.backgroundColor =  UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
-            }
-            else if(self.filteredPlaces[indexPath.row].availableSlots == 0){
-                cell.img.backgroundColor =  UIColor.grayColor()
-            }
-            else if (self.filteredPlaces[indexPath.row].availableBikes < 5){
-                cell.img.backgroundColor =  UIColor(red: 251/255, green: 188/255, blue: 5/255, alpha: 1)
-            }
-            else{
-                cell.img.backgroundColor =  UIColor(red: 52/255, green: 168/255, blue: 83/255, alpha: 1)
-                
-            }
-    
-             cell.displayString = self.filteredPlaces[indexPath.row].getDisplayString()
-            
-        }
-
-        return cell
     }
     
     @IBAction func searchPressed(sender: AnyObject) {
@@ -197,25 +108,27 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         }
         
     }
-        
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("Failed to find user's location: \(error.localizedDescription)")
+    @IBAction func mySegmentedControlPressed(sender: AnyObject) {
+        if(mySegmentedControl.selectedSegmentIndex == 1){
+            self.searchButton.enabled = false
+            self.searchButton.tintColor = UIColor.clearColor()
+        }
+        else{
+            self.searchButton.enabled = true
+            self.searchButton.tintColor = UIColor.whiteColor()
+        }
+        self.tableView.reloadData()
     }
     
     
-    // TODO - refactor for performance and scalability
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-       
         if let cell = sender as? CustomCell {
+            
             let secondViewController = segue.destinationViewController as! ViewController
-            for place in places{
-                if(place.getDisplayString() == cell.displayString){
-                    secondViewController.places = self.places
-                    secondViewController.currentPlace.append(place)
-                    break
-                }
-            }
+            let index = self.places.indexOf({$0.id == cell.id})!  //This line is important to remember
+            secondViewController.places = self.places
+            secondViewController.currentPlace.append(self.places[index])
             
         }
         else{
@@ -224,71 +137,111 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         }
     }
     
+   
     
-    /*
-     
-     func updateDistanceInBackground(){
-     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),{
-     print("he")
-     for place in self.places{
-     place.distance = Int((self.locationManager.location?.distanceFromLocation(place.location))!)
-     }
-     self.places.sortInPlace({$0.distance < $1.distance})
-     dispatch_async(dispatch_get_main_queue(),{
-     self.tableView.reloadData()
-     });
-     });
-     }
-     
-     */
+    func refreshTable(){
+        self.refreshControl?.beginRefreshing()
+        self.places.removeAll()
+        self.filteredPlaces.removeAll()
+        self.favorites.removeAll()
+        fetchJSON()
+        self.tableView.reloadData()
+        self.refreshController.endRefreshing()
+    }
     
-    /*
-     func calculateDistanceIn2d(long1: Double, lat1: Double, long2: Double, lat2: Double) -> Int{
-     let long1meter = long1 * 49897
-     let lat1meter = lat1 * 111469
-     let long2meter = long2 * 49897
-     let lat2meter = lat2 * 111469
-     let x = pow(long2meter - long1meter , 2)
-     let y = pow(lat2meter - lat1meter , 2)
-     let dist = sqrt(x + y)
-     return Int(dist)
-     }
-     */
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        if (self.favoritesID.contains(self.places[indexPath.row].id)){
+            let fav = UITableViewRowAction(style: .Normal, title: "Unfavorite"){(
+                action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+                self.favoritesID.removeAtIndex(self.favoritesID.indexOf(self.places[indexPath.row].id)!)
+                self.favorites.removeAtIndex(self.favorites.indexOf(self.places[indexPath.row])!)
+                self.favorites.sortInPlace({$0.distance < $1.distance})
+                self.tableView.reloadData()
+            }
+            fav.backgroundColor = UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
+            return [fav]
+        }
+            
+        else{
+            let fav = UITableViewRowAction(style: .Normal, title: "Favorite"){(
+                action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+                self.favoritesID.append(self.places[indexPath.row].id)
+                self.favorites.append(self.places[indexPath.row])
+                self.favorites.sortInPlace({$0.distance < $1.distance})
+                self.tableView.reloadData()
+            }
+            fav.backgroundColor = UIColor(red: 52/255, green: 168/255, blue: 83/255, alpha: 1)
+            return [fav]
+        }
+    }
+    
 
-
-    /*
-    // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
+        if(mySegmentedControl.selectedSegmentIndex == 1){
+            return false
+        }
         return true
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return getCurrentTableViewArray().count
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+    
+    
+    func getCurrentTableViewArray()->[BikePlace]{
+        if(mySegmentedControl.selectedSegmentIndex == 1){
+            return self.favorites
+        }
+        if(filteredPlaces.count > 0){
+             return self.filteredPlaces
+        }
+        else {
+            return self.places
+        }
+       
     }
-    */
 
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+  
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell:CustomCell = self.tableView.dequeueReusableCellWithIdentifier("myCell")! as! CustomCell
+        let hour = NSCalendar.currentCalendar().component(.Hour, fromDate: NSDate())
+        tableView.rowHeight = 51
+        let array: [BikePlace] = self.getCurrentTableViewArray()
+        
+        if hour < 6{
+            cell.one.text = array[indexPath.row].getDisplayString() + " [Stengt]"
+        }
+        else{
+            cell.one.text = array[indexPath.row].getDisplayString()
+        }
+        
+        if(self.places[indexPath.row].distance > 10000){
+            cell.two.text = String(array[indexPath.row].distance/1000) +
+                " Kilometer"  + " - Stativer: " + String(array[indexPath.row].availableSlots) +  " - Sykler: " + String(array[indexPath.row].availableBikes)
+        }
+        else{
+            cell.two.text = String(array[indexPath.row].distance) +
+                " Meter"  + " - Stativer: " + String(array[indexPath.row].availableSlots) +  " - Sykler: " + String(array[indexPath.row].availableBikes)
+        }
+        
+        if(array[indexPath.row].availableBikes == 0){
+            cell.img.backgroundColor =  UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
+        }
+        else if(array[indexPath.row].availableSlots == 0){
+            cell.img.backgroundColor =  UIColor.grayColor()
+        }
+        else if (array[indexPath.row].availableBikes < 5){
+            cell.img.backgroundColor =  UIColor(red: 251/255, green: 188/255, blue: 5/255, alpha: 1)
+        }
+        else{
+            cell.img.backgroundColor =  UIColor(red: 52/255, green: 168/255, blue: 83/255, alpha: 1)
+        }
+        cell.id = array[indexPath.row].id
+
+        return cell
     }
-    */
-
+    
+  
+    
+    
 }
