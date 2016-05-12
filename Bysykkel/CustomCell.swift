@@ -13,7 +13,8 @@ class CustomCell: UITableViewCell {
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var two: UILabel!
     @IBOutlet weak var one: UILabel!
-    var displayString = ""
+    var id = -1
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         img.layer.cornerRadius = img.frame.size.width/2
@@ -23,7 +24,6 @@ class CustomCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 
