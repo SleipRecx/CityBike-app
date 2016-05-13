@@ -10,6 +10,7 @@ import Alamofire
 import SwiftyJSON
 import CoreLocation
 import Foundation
+import CoreData
 
 class TableViewController: UITableViewController, UISearchResultsUpdating, CLLocationManagerDelegate  {
     
@@ -25,10 +26,12 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     var filteredPlaces: [BikePlace] = []
     var favorites: [BikePlace] = []
     var favoritesID: [Int] = []
+    var listItems = [NSManagedObject]()
 
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        fetchFavoritesFromCoreData()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
@@ -52,6 +55,7 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         }
     }
     
+    
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         self.filteredPlaces =  self.places.filter {place -> Bool in
             if place.getDisplayString().lowercaseString.containsString(self.searchController.searchBar.text!.lowercaseString){
@@ -62,6 +66,47 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
             }
         }
         self.resultController.tableView.reloadData();
+    }
+    
+     func fetchFavoritesFromCoreData() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Favorite")
+        do{
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            listItems = results as! [NSManagedObject]
+        }
+        catch{
+            print("error")
+        }
+        for item in listItems{
+            self.favoritesID.append(item.valueForKey("id") as! Int)
+        }
+    }
+    
+    
+    
+    func saveFavorites(itemToSave: Int){
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+       
+        
+        let entity = NSEntityDescription.entityForName("Favorite", inManagedObjectContext: managedContext)
+        
+        let item = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        
+        item.setValue(itemToSave, forKey: "id")
+        
+        do{
+            try managedContext.save()
+            listItems.append(item)
+        
+        }
+        catch{
+            print("error")
+        }
+        
+        
     }
     
        func fetchJSON(){
@@ -157,6 +202,17 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
                 self.favorites.removeAtIndex(self.favorites.indexOf(self.places[indexPath.row])!)
                 self.favorites.sortInPlace({$0.distance < $1.distance})
                 self.tableView.reloadData()
+                let appDel:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let context:NSManagedObjectContext = appDel.managedObjectContext
+                context.deleteObject(self.listItems[self.listItems.indexOf({$0.valueForKey("id")as! Int == self.places[indexPath.row].id})!] as NSManagedObject)
+                self.listItems.removeAtIndex(self.listItems.indexOf({$0.valueForKey("id")as! Int == self.places[indexPath.row].id})!)
+                do{
+                    try context.save()
+                }
+                catch{
+                    
+                }
+                
             }
             fav.backgroundColor = UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
             return [fav]
@@ -167,7 +223,9 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
                 action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
                 self.favoritesID.append(self.places[indexPath.row].id)
                 self.favorites.append(self.places[indexPath.row])
+                self.saveFavorites(self.places[indexPath.row].id)
                 self.favorites.sortInPlace({$0.distance < $1.distance})
+                
                 self.tableView.reloadData()
             }
             fav.backgroundColor = UIColor(red: 52/255, green: 168/255, blue: 83/255, alpha: 1)
