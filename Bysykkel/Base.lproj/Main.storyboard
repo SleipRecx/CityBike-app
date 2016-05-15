@@ -43,6 +43,35 @@
             <point key="canvasLocation" x="1576.5" y="-476.5"/>
         </scene>
         <!--Table View Controller-->
+        <scene sceneID="Hw0-96-7ZX">
+            <objects>
+                <tableViewController id="Fha-Iq-vep" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="grB-z7-wtA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ayh-N0-9iD">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ayh-N0-9iD" id="fi4-a4-V8O">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Fha-Iq-vep" id="yfl-q1-rD8"/>
+                            <outlet property="delegate" destination="Fha-Iq-vep" id="iTK-YT-hjl"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="69W-22-shE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1072.5" y="-560.5"/>
+        </scene>
+        <!--Table View Controller-->
         <scene sceneID="lUh-dD-2Fa">
             <objects>
                 <tableViewController id="JNc-GE-zgN" customClass="TableViewController" customModule="Bysykkel" customModuleProvider="target" sceneMemberID="viewController">
@@ -112,12 +141,6 @@
                                 <action selector="mySegmentedControlPressed:" destination="JNc-GE-zgN" eventType="valueChanged" id="6bV-kw-ebf"/>
                             </connections>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="7eM-Ur-cfa">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="searchPressed:" destination="JNc-GE-zgN" id="6Lx-JR-cbv"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="barPosition">
@@ -126,7 +149,9 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="mySegmentedControl" destination="MRl-oe-ocJ" id="ReL-30-oG6"/>
-                        <outlet property="searchButton" destination="7eM-Ur-cfa" id="Q8L-7O-J5t"/>
+                        <segue destination="Fha-Iq-vep" kind="popoverPresentation" identifier="myPopover" popoverAnchorView="9T4-A9-MxZ" id="r7U-BS-brj">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lfO-Bp-TMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
