@@ -19,6 +19,7 @@
 		22C1B2DC1CE5B6F7005FE7A7 /* myCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22C1B2DA1CE5B6F7005FE7A7 /* myCoreData.xcdatamodeld */; };
 		22D8345D1CD89B4200B4AD1D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8345C1CD89B4200B4AD1D /* ViewController.swift */; };
 		22D8345F1CD8A21800B4AD1D /* BikePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8345E1CD8A21800B4AD1D /* BikePlace.swift */; };
+		22F45A7B1CE9262D00B33857 /* FavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F45A7A1CE9262D00B33857 /* FavoriteTableViewController.swift */; };
 		98F549A9F75A08B532094C51 /* Pods_Bysykkel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8066E8373982E62E882B8ACC /* Pods_Bysykkel.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		22C1B2DB1CE5B6F7005FE7A7 /* myCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = myCoreData.xcdatamodel; sourceTree = "<group>"; };
 		22D8345C1CD89B4200B4AD1D /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		22D8345E1CD8A21800B4AD1D /* BikePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikePlace.swift; sourceTree = "<group>"; };
+		22F45A7A1CE9262D00B33857 /* FavoriteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewController.swift; sourceTree = "<group>"; };
 		30B129EEC3CD6A87651C03ED /* Pods-Bysykkel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bysykkel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bysykkel/Pods-Bysykkel.debug.xcconfig"; sourceTree = "<group>"; };
 		8066E8373982E62E882B8ACC /* Pods_Bysykkel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bysykkel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2A5DC90E9A5EBB1BB95708D /* Pods-Bysykkel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bysykkel.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bysykkel/Pods-Bysykkel.release.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				22667CA61CD7BEE2005F3D66 /* AppDelegate.swift */,
 				22D8345C1CD89B4200B4AD1D /* ViewController.swift */,
 				22667CB81CD7BFC8005F3D66 /* TableViewController.swift */,
+				22F45A7A1CE9262D00B33857 /* FavoriteTableViewController.swift */,
 				22965D7F1CE14B340031F735 /* CustomCell.swift */,
 				22667CAA1CD7BEE2005F3D66 /* Main.storyboard */,
 				22667CAF1CD7BEE2005F3D66 /* LaunchScreen.storyboard */,
@@ -235,6 +238,7 @@
 			files = (
 				22C1B2DC1CE5B6F7005FE7A7 /* myCoreData.xcdatamodeld in Sources */,
 				22936CF91CE52E0400BA3CC5 /* UINavigationBarTaller.swift in Sources */,
+				22F45A7B1CE9262D00B33857 /* FavoriteTableViewController.swift in Sources */,
 				22D8345D1CD89B4200B4AD1D /* ViewController.swift in Sources */,
 				22667CB91CD7BFC8005F3D66 /* TableViewController.swift in Sources */,
 				22D8345F1CD8A21800B4AD1D /* BikePlace.swift in Sources */,
