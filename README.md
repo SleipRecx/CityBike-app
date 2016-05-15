@@ -2,7 +2,7 @@
 An App to locate city bikes in Trondheim
 
 
-![alt tag](http://puu.sh/oT7Zw/16c464c7e4.png)
+![alt tag](http://puu.sh/oQh1n/8e3a6e1d8b.png)
 
 
 
