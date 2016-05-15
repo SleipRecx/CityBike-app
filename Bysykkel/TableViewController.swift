@@ -18,6 +18,9 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     var refreshController = UIRefreshControl()
     var resultController = UITableViewController()
     let locationManager = CLLocationManager()
+   
+    
+  
     
     @IBOutlet weak var mySegmentedControl: UISegmentedControl!
     @IBOutlet weak var searchButton: UIBarButtonItem!
@@ -31,6 +34,9 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        let searchBarItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(TableViewController.searchPressed))
+        searchBarItem.tintColor = UIColor.whiteColor()
+        navigationItem.rightBarButtonItem = searchBarItem
         fetchFavoritesFromCoreData()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -144,7 +150,7 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         
     }
     
-    @IBAction func searchPressed(sender: AnyObject) {
+    func searchPressed(){
         if self.tableView.tableHeaderView == self.searchController.searchBar{
             self.tableView.tableHeaderView = nil
         }
@@ -156,24 +162,33 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     
     @IBAction func mySegmentedControlPressed(sender: AnyObject) {
         if(mySegmentedControl.selectedSegmentIndex == 1){
-            self.searchButton.enabled = false
-            self.searchButton.tintColor = UIColor.clearColor()
+            let addBarItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(TableViewController.performPopover))
+            addBarItem.tintColor = UIColor.whiteColor()
+            navigationItem.rightBarButtonItem = addBarItem
         }
         else{
-            self.searchButton.enabled = true
-            self.searchButton.tintColor = UIColor.whiteColor()
+            let searchBarItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(TableViewController.searchPressed))
+            searchBarItem.tintColor = UIColor.whiteColor()
+            navigationItem.rightBarButtonItem = searchBarItem
         }
         self.tableView.reloadData()
     }
     
+    func performPopover(){
+        performSegueWithIdentifier("myPopover", sender: self)
+    }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let cell = sender as? CustomCell {
-            
+        if(segue.identifier == "mySegue"){
+            let cell = sender as? CustomCell
             let secondViewController = segue.destinationViewController as! ViewController
-            let index = self.places.indexOf({$0.id == cell.id})!  //This line is important to remember
+            let index = self.places.indexOf({$0.id == cell!.id})!  //This line is important to remember
             secondViewController.places = self.places
             secondViewController.currentPlace.append(self.places[index])
+        }
+            
+        else if(segue.identifier == "myPopover"){
             
         }
         else{
@@ -181,8 +196,7 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
             secondViewController.places = self.places
         }
     }
-    
-   
+
     
     func refreshTable(){
         self.refreshControl?.beginRefreshing()
