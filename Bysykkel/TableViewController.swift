@@ -184,24 +184,23 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         
     }
     
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
-    }
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "mySegue"){
             let cell = sender as? CustomCell
-            let secondViewController = segue.destinationViewController as! ViewController
-            let index = self.places.indexOf({$0.id == cell!.id})!  //This line is important to remember
-            secondViewController.places = self.places
+            let index = self.places.indexOf({$0.id == cell!.id})!
+            let secondViewController = segue.destinationViewController as! MapViewController
             secondViewController.currentPlace.append(self.places[index])
+            secondViewController.places = self.places
         }
             
         else if(segue.identifier == "myPopover"){
             
+            
         }
         else{
+            
             let secondViewController = segue.destinationViewController as! MapViewController
             secondViewController.places = self.places
         }
