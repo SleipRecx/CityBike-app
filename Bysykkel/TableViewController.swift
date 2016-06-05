@@ -10,7 +10,6 @@ import Alamofire
 import SwiftyJSON
 import CoreLocation
 import Foundation
-import CoreData
 
 class TableViewController: UITableViewController, UISearchResultsUpdating, CLLocationManagerDelegate,UIPopoverPresentationControllerDelegate {
     
@@ -28,6 +27,7 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     var favorites: [BikePlace] = []
     var favoritesID: [Int] = []
 
+   
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -161,9 +161,10 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     }
     
     func performPopover(){
-        
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc: UINavigationController = storyboard.instantiateViewControllerWithIdentifier("FavoritesViewController") as! UINavigationController
+        self.presentViewController(vc, animated: true, completion: nil)
     }
-    
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -175,10 +176,6 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
             secondViewController.places = self.places
         }
             
-        else if(segue.identifier == "myPopover"){
-            
-            
-        }
         else{
             
             let secondViewController = segue.destinationViewController as! MapViewController
