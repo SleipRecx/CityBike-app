@@ -19,7 +19,6 @@
 		226C5B5C1D032A0800AE3015 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2274E6011CD8ECC500BA002F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2274E6001CD8ECC500BA002F /* MapViewController.swift */; };
 		22965D801CE14B340031F735 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22965D7F1CE14B340031F735 /* CustomCell.swift */; };
-		22C1B2DC1CE5B6F7005FE7A7 /* myCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22C1B2DA1CE5B6F7005FE7A7 /* myCoreData.xcdatamodeld */; };
 		22D8345F1CD8A21800B4AD1D /* BikePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8345E1CD8A21800B4AD1D /* BikePlace.swift */; };
 		7F218091F19E86D103B51CFB /* Pods_Bysykkel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43964A5C70BB4F7FBE97BE0 /* Pods_Bysykkel.framework */; };
 /* End PBXBuildFile section */
@@ -52,7 +51,6 @@
 		22667CB81CD7BFC8005F3D66 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		2274E6001CD8ECC500BA002F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		22965D7F1CE14B340031F735 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
-		22C1B2DB1CE5B6F7005FE7A7 /* myCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = myCoreData.xcdatamodel; sourceTree = "<group>"; };
 		22D8345E1CD8A21800B4AD1D /* BikePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikePlace.swift; sourceTree = "<group>"; };
 		75DE5B18AFA64E525D7850BC /* Pods-Bysykkel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bysykkel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bysykkel/Pods-Bysykkel.debug.xcconfig"; sourceTree = "<group>"; };
 		AF8BDF4A6972665F1B2A8477 /* Pods-Bysykkel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bysykkel.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bysykkel/Pods-Bysykkel.release.xcconfig"; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 				22D8345E1CD8A21800B4AD1D /* BikePlace.swift */,
 				22667CAA1CD7BEE2005F3D66 /* Main.storyboard */,
 				22667CAF1CD7BEE2005F3D66 /* LaunchScreen.storyboard */,
-				22C1B2DA1CE5B6F7005FE7A7 /* myCoreData.xcdatamodeld */,
 				22667CAD1CD7BEE2005F3D66 /* Assets.xcassets */,
 			);
 			path = Bysykkel;
@@ -255,7 +252,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22C1B2DC1CE5B6F7005FE7A7 /* myCoreData.xcdatamodeld in Sources */,
 				22667CB91CD7BFC8005F3D66 /* TableViewController.swift in Sources */,
 				22D8345F1CD8A21800B4AD1D /* BikePlace.swift in Sources */,
 				2274E6011CD8ECC500BA002F /* MapViewController.swift in Sources */,
@@ -420,19 +416,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		22C1B2DA1CE5B6F7005FE7A7 /* myCoreData.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				22C1B2DB1CE5B6F7005FE7A7 /* myCoreData.xcdatamodel */,
-			);
-			currentVersion = 22C1B2DB1CE5B6F7005FE7A7 /* myCoreData.xcdatamodel */;
-			path = myCoreData.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 22667C9B1CD7BEE2005F3D66 /* Project object */;
 }
