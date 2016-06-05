@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		224FCEA51D031E970080A306 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224FCEA31D031E970080A306 /* Alamofire.framework */; };
 		224FCEA61D031E970080A306 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224FCEA41D031E970080A306 /* SwiftyJSON.framework */; };
+		22609D1A1D046A860042B98E /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22609D191D046A860042B98E /* FavoritesController.swift */; };
 		22667CA71CD7BEE2005F3D66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22667CA61CD7BEE2005F3D66 /* AppDelegate.swift */; };
 		22667CAC1CD7BEE2005F3D66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22667CAA1CD7BEE2005F3D66 /* Main.storyboard */; };
 		22667CAE1CD7BEE2005F3D66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22667CAD1CD7BEE2005F3D66 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		224FCEA31D031E970080A306 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Bysykkel-hjzkmfjejcyjzyguoeqlydtkeoxx/Build/Products/Debug-iphonesimulator/Alamofire.framework"; sourceTree = "<group>"; };
 		224FCEA41D031E970080A306 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Bysykkel-hjzkmfjejcyjzyguoeqlydtkeoxx/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		22609D191D046A860042B98E /* FavoritesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 		22667CA31CD7BEE2005F3D66 /* Bysykkel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bysykkel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22667CA61CD7BEE2005F3D66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22667CAB1CD7BEE2005F3D66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -81,6 +83,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		22609D141D04610B0042B98E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				22667CB81CD7BFC8005F3D66 /* TableViewController.swift */,
+				22609D191D046A860042B98E /* FavoritesController.swift */,
+				2274E6001CD8ECC500BA002F /* MapViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		22609D151D0461250042B98E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				22D8345E1CD8A21800B4AD1D /* BikePlace.swift */,
+				22965D7F1CE14B340031F735 /* CustomCell.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		22609D161D0461350042B98E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				22667CAA1CD7BEE2005F3D66 /* Main.storyboard */,
+				22667CAF1CD7BEE2005F3D66 /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		22609D181D0461690042B98E /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				22667CB21CD7BEE2005F3D66 /* Info.plist */,
+				22667CA61CD7BEE2005F3D66 /* AppDelegate.swift */,
+				22667CAD1CD7BEE2005F3D66 /* Assets.xcassets */,
+			);
+			name = Setup;
+			sourceTree = "<group>";
+		};
 		22667C9A1CD7BEE2005F3D66 = {
 			isa = PBXGroup;
 			children = (
@@ -102,15 +142,10 @@
 		22667CA51CD7BEE2005F3D66 /* Bysykkel */ = {
 			isa = PBXGroup;
 			children = (
-				22667CB21CD7BEE2005F3D66 /* Info.plist */,
-				22667CA61CD7BEE2005F3D66 /* AppDelegate.swift */,
-				22667CB81CD7BFC8005F3D66 /* TableViewController.swift */,
-				2274E6001CD8ECC500BA002F /* MapViewController.swift */,
-				22965D7F1CE14B340031F735 /* CustomCell.swift */,
-				22D8345E1CD8A21800B4AD1D /* BikePlace.swift */,
-				22667CAA1CD7BEE2005F3D66 /* Main.storyboard */,
-				22667CAF1CD7BEE2005F3D66 /* LaunchScreen.storyboard */,
-				22667CAD1CD7BEE2005F3D66 /* Assets.xcassets */,
+				22609D151D0461250042B98E /* Model */,
+				22609D161D0461350042B98E /* View */,
+				22609D141D04610B0042B98E /* Controllers */,
+				22609D181D0461690042B98E /* Setup */,
 			);
 			path = Bysykkel;
 			sourceTree = "<group>";
@@ -254,6 +289,7 @@
 			files = (
 				22667CB91CD7BFC8005F3D66 /* TableViewController.swift in Sources */,
 				22D8345F1CD8A21800B4AD1D /* BikePlace.swift in Sources */,
+				22609D1A1D046A860042B98E /* FavoritesController.swift in Sources */,
 				2274E6011CD8ECC500BA002F /* MapViewController.swift in Sources */,
 				22965D801CE14B340031F735 /* CustomCell.swift in Sources */,
 				22667CA71CD7BEE2005F3D66 /* AppDelegate.swift in Sources */,
