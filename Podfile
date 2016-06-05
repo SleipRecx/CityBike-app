@@ -4,6 +4,6 @@ platform :ios, '9.2'
  use_frameworks!
 
 target 'Bysykkel' do
-pod 'Alamofire', '~> 3.3'
+pod 'Alamofire', '~> 3.4'
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 end

@@ -12,15 +12,13 @@ import CoreLocation
 import Foundation
 import CoreData
 
-class TableViewController: UITableViewController, UISearchResultsUpdating, CLLocationManagerDelegate  {
+class TableViewController: UITableViewController, UISearchResultsUpdating, CLLocationManagerDelegate,UIPopoverPresentationControllerDelegate {
     
     var searchController : UISearchController!
     var refreshController = UIRefreshControl()
     var resultController = UITableViewController()
     let locationManager = CLLocationManager()
-   
-    
-  
+
     
     @IBOutlet weak var mySegmentedControl: UISegmentedControl!
     @IBOutlet weak var searchButton: UIBarButtonItem!
@@ -33,6 +31,7 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
 
     
     override func viewDidLoad(){
+       
         super.viewDidLoad()
         let searchBarItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(TableViewController.searchPressed))
         searchBarItem.tintColor = UIColor.whiteColor()
@@ -126,18 +125,25 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
                     let json = JSON(value)
                     let array = json["result"]["LiveStationData"].arrayValue
                     for place in array{
-                        let online:Bool =  place["Online"].boolValue
+                        var online:Bool =  place["Online"].boolValue
                         let longitude: Double = place["Longitude"].doubleValue
                         let latitude: Double = place["Latitude"].doubleValue
                         let location = CLLocation(latitude: latitude, longitude: longitude)
                         let distance = Int((myLocation.distanceFromLocation(location)))
-                        let object = BikePlace(availableBikes: place["AvailableBikeCount"].intValue,availableSlots: place["AvailableSlotCount"].intValue,adress: place["Address"].stringValue,online: online,location: location, distance: distance)
+                        var adress = place["Address"].stringValue
+                        let bikes = place["AvailableBikeCount"].intValue
+                        let slots = place["AvailableSlotCount"].intValue
+                        if(adress.containsString("[Offline]")){
+                            online = false
+                            adress = adress.componentsSeparatedByString(" ")[1]
+                        }
+                        let object = BikePlace(availableBikes: bikes,availableSlots: slots, adress: adress,online: online,location: location, distance: distance)
                         self.places.append(object)
-                        if(self.favoritesID.contains(Int(place["Address"].stringValue.componentsSeparatedByString("-")[0])!)){
+                        if(self.favoritesID.contains(Int(adress.componentsSeparatedByString("-")[0])!)){
                             self.favorites.append(object)
                         }
-
                     }
+                    
                     self.places.sortInPlace({$0.distance < $1.distance})
                     self.favorites.sortInPlace({$0.distance < $1.distance})
                     self.tableView.reloadData()
@@ -175,7 +181,11 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     }
     
     func performPopover(){
-        performSegueWithIdentifier("myPopover", sender: self)
+        
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
     }
     
     

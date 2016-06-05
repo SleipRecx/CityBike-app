@@ -34,11 +34,9 @@ class MapViewController: UIViewController {
         let annotationsToRemove = map.annotations
         map.removeAnnotations( annotationsToRemove )
         fetchJSON()
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     func populateMap(){
         for place in places{
