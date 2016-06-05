@@ -40,7 +40,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghe-0T-5UW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1576.5" y="-476.5"/>
+            <point key="canvasLocation" x="1559.5" y="292.5"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="lUh-dD-2Fa">
@@ -82,7 +82,7 @@
                                     <outlet property="img" destination="sih-eG-10k" id="hug-eC-6li"/>
                                     <outlet property="one" destination="PuK-Bm-kpF" id="Nmb-xT-RhD"/>
                                     <outlet property="two" destination="cnP-Hh-bDp" id="t2k-dX-4t1"/>
-                                    <segue destination="2Jr-zA-uN4" kind="show" identifier="mySegue" id="N6K-4f-NLR"/>
+                                    <segue destination="WkO-CW-PgN" kind="show" identifier="mySegue" id="C48-Ck-Fa4"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -126,33 +126,6 @@
             </objects>
             <point key="canvasLocation" x="1081.5" y="292.5"/>
         </scene>
-        <!--Stednavn-->
-        <scene sceneID="sUZ-hQ-gfQ">
-            <objects>
-                <viewController id="2Jr-zA-uN4" customClass="ViewController" customModule="Bysykkel" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="XRi-r6-ZDQ"/>
-                        <viewControllerLayoutGuide type="bottom" id="CNT-fs-AYX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="qd4-MB-NJJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Rq4-bb-jY7">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                            </mapView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Stednavn" id="xQX-2E-zfj"/>
-                    <connections>
-                        <outlet property="map" destination="Rq4-bb-jY7" id="4v1-8d-uox"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wkT-tg-xj7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1576.5" y="303.5"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="fV5-p0-b6y">
             <objects>
@@ -168,11 +141,6 @@
                             <color key="textShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
                         </textAttributes>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="barPosition">
-                                <integer key="value" value="10"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -181,10 +149,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ov5-M5-S5f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="543.5" y="292.5"/>
+            <point key="canvasLocation" x="629.5" y="292.5"/>
         </scene>
     </scenes>
     <resources>
         <image name="map" width="26" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="C48-Ck-Fa4"/>
+    </inferredMetricsTieBreakers>
 </document>
