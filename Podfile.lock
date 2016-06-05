@@ -6,6 +6,7 @@ DEPENDENCIES:
   - Alamofire (~> 3.4)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
+
 EXTERNAL SOURCES:
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
