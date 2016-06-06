@@ -42,38 +42,47 @@
             </objects>
             <point key="canvasLocation" x="1574.5" y="292.5"/>
         </scene>
-        <!--Add Favorites-->
+        <!--Legg til Favoritter-->
         <scene sceneID="1Fu-Mg-P9h">
             <objects>
                 <tableViewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="sEI-hN-fN9" customClass="FavoritesController" customModule="Bysykkel" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Jwi-Jn-ce4">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Jwi-Jn-ce4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextCell" textLabel="Gwe-7F-wkx" detailTextLabel="eGu-Ps-S8M" style="IBUITableViewCellStyleSubtitle" id="Kxw-sE-cRv">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="myCell" rowHeight="51" id="L3J-MK-UHM" customClass="CustomCell" customModule="Bysykkel" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="375" height="51"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kxw-sE-cRv" id="aaX-7w-D2b">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L3J-MK-UHM" id="VD7-vt-j1S">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gwe-7F-wkx">
-                                            <rect key="frame" x="15" y="3" width="34" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bakke bro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyR-jo-qTe">
+                                            <rect key="frame" x="38" y="8" width="304" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eGu-Ps-S8M">
-                                            <rect key="frame" x="15" y="24" width="37" height="17"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="153 Meter - Sykler: 7, Stativer: 9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8up-gL-1An">
+                                            <rect key="frame" x="38" y="27" width="279" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rix-sq-kXi">
+                                            <rect key="frame" x="14" y="22" width="10" height="10"/>
+                                            <color key="backgroundColor" red="0.049881784540000002" green="0.7216796875" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.050980392159999999" green="0.72156862749999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="img" destination="Rix-sq-kXi" id="ASn-ql-2Bb"/>
+                                    <outlet property="one" destination="yyR-jo-qTe" id="Kym-D8-3DA"/>
+                                    <outlet property="two" destination="8up-gL-1An" id="pwg-cb-coH"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -81,14 +90,14 @@
                             <outlet property="delegate" destination="sEI-hN-fN9" id="HYT-PB-7mk"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Add Favorites" id="zXp-O4-qOa">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Mjv-1N-oBX">
+                    <navigationItem key="navigationItem" title="Legg til Favoritter" id="zXp-O4-qOa">
+                        <barButtonItem key="leftBarButtonItem" title="Avbryt" id="Mjv-1N-oBX">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="dismiss:" destination="sEI-hN-fN9" id="vGU-aO-EHR"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Add" id="DpY-33-Nsy">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Legg til" id="DpY-33-Nsy">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="sEI-hN-fN9" id="9P9-UW-Bv7"/>
