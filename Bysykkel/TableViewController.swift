@@ -27,11 +27,16 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     var favorites: [BikePlace] = []
     var favoritesID: [Int] = []
 
-   
     
     override func viewDidLoad(){
         super.viewDidLoad()
         fetchFavorites()
+
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+    
         let searchBarItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(TableViewController.searchPressed))
         searchBarItem.tintColor = UIColor.whiteColor()
         navigationItem.rightBarButtonItem = searchBarItem
@@ -39,15 +44,19 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        
         self.resultController.tableView.dataSource = self
         self.resultController.tableView.delegate = self
-        self.searchController = UISearchController(searchResultsController: self.resultController)
         self.refreshControl = self.refreshController
-        self.searchController.dimsBackgroundDuringPresentation = false
         self.refreshController.addTarget(self, action: #selector(TableViewController.refreshTable), forControlEvents: .ValueChanged)
+        
+        self.searchController = UISearchController(searchResultsController: self.resultController)
+        self.searchController.dimsBackgroundDuringPresentation = false
         self.searchController.searchResultsUpdater = self
         self.searchController.searchBar.barTintColor = UIColor(red: 165/255, green: 30/255, blue: 34/255, alpha: 1.0)
+        self.searchController.searchBar.tintColor = UIColor.whiteColor()
         definesPresentationContext = true
+        
         if CLLocationManager.locationServicesEnabled() {
             switch(CLLocationManager.authorizationStatus()) {
             case .NotDetermined, .Restricted, .Denied:
