@@ -17,8 +17,6 @@ class FavoritesController: UITableViewController {
     
     @IBOutlet weak var addButton: UIBarButtonItem!
     
-    let textCellIdentifier = "TextCell"
-    
     var passDataBack: ((data: [BikePlace]) -> ())?
     
     override func viewDidLoad() {
@@ -49,8 +47,11 @@ class FavoritesController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         currentFavorites.append(possibleFavorites[indexPath.row])
-        let cell: UITableViewCell = self.tableView.cellForRowAtIndexPath(indexPath)!
+        let cell: CustomCell = self.tableView.cellForRowAtIndexPath(indexPath) as! CustomCell
         cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        
+        
+        cell.img.backgroundColor = getCellColor(possibleFavorites[indexPath.row])
         enableDisableAddButton()
     }
     
@@ -58,8 +59,6 @@ class FavoritesController: UITableViewController {
         currentFavorites = currentFavorites.filter() { $0 !== possibleFavorites[indexPath.row] }
         let cell: UITableViewCell = self.tableView.cellForRowAtIndexPath(indexPath)!
         cell.accessoryType = UITableViewCellAccessoryType.None
-        print(currentFavorites.count)
-
         enableDisableAddButton()
     }
     
@@ -71,25 +70,65 @@ class FavoritesController: UITableViewController {
             addButton.enabled = false
         }
     }
- 
-    
+
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return possibleFavorites.count
     }
     
     
+    func getCellColor(place:BikePlace) -> UIColor{
+        if(place.availableBikes == 0){
+            return UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
+        }
+        else if(place.availableSlots == 0){
+            return UIColor.grayColor()
+        }
+        else if (place.availableBikes < 5){
+            return UIColor(red: 251/255, green: 188/255, blue: 5/255, alpha: 1)
+        }
+        else{
+            return UIColor(red: 52/255, green: 168/255, blue: 83/255, alpha: 1)
+        }
+    }
+    
+    func addExtraMarks(cell: CustomCell, place: BikePlace){
+        let hour = NSCalendar.currentCalendar().component(.Hour, fromDate: NSDate())
+        if hour < 6{
+            cell.one.text = place.getDisplayString() + " [Stengt]"
+        }
+            
+        else{
+            cell.one.text = place.getDisplayString()
+        }
+        
+        if(place.distance > 10000){
+            cell.two.text = String(place.distance/1000) +
+                " Kilometer"  + " - Stativer: " + String(place.availableSlots) +  " - Sykler: " + String(place.availableBikes)
+        }
+        else{
+            cell.two.text = String(place.distance) +
+                " Meter"  + " - Stativer: " + String(place.availableSlots) +  " - Sykler: " + String(place.availableBikes)
+        }
+
+    }
+    
+    
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath)
+        tableView.rowHeight = 51
+        let cell:CustomCell = self.tableView.dequeueReusableCellWithIdentifier("myCell")! as! CustomCell
+        let array: [BikePlace] = self.possibleFavorites
+        cell.id = array[indexPath.row].id
+        cell.img.backgroundColor = getCellColor(array[indexPath.row])
         cell.accessoryType = UITableViewCellAccessoryType.None
         let bgColorView = UIView()
         bgColorView.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1.0)
         cell.selectedBackgroundView = bgColorView
-        cell.textLabel?.text = possibleFavorites[indexPath.row].adress
-        cell.detailTextLabel?.text = String(possibleFavorites[indexPath.row].distance) +
-            " Meter"  + " - Stativer: " + String(possibleFavorites[indexPath.row].availableSlots) +  " - Sykler: " + String(possibleFavorites[indexPath.row].availableBikes)
-      
+        addExtraMarks(cell, place: array[indexPath.row])
+        
         return cell
+
     }
     
 
