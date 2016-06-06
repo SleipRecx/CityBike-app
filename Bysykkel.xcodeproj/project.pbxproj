@@ -83,16 +83,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		22609D141D04610B0042B98E /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				22667CB81CD7BFC8005F3D66 /* TableViewController.swift */,
-				22609D191D046A860042B98E /* FavoritesController.swift */,
-				2274E6001CD8ECC500BA002F /* MapViewController.swift */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
 		22609D151D0461250042B98E /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,10 +134,20 @@
 			children = (
 				22609D151D0461250042B98E /* Model */,
 				22609D161D0461350042B98E /* View */,
-				22609D141D04610B0042B98E /* Controllers */,
+				2296431C1D05993E001E8015 /* Controller */,
 				22609D181D0461690042B98E /* Setup */,
 			);
 			path = Bysykkel;
+			sourceTree = "<group>";
+		};
+		2296431C1D05993E001E8015 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				22667CB81CD7BFC8005F3D66 /* TableViewController.swift */,
+				22609D191D046A860042B98E /* FavoritesController.swift */,
+				2274E6001CD8ECC500BA002F /* MapViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		E1C791294E6B00541E6D64D5 /* Pods */ = {
