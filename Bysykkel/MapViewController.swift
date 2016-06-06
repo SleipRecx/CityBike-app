@@ -22,6 +22,7 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         populateMap()
         if(currentPlace.count > 0){
             selectAnnotation()
