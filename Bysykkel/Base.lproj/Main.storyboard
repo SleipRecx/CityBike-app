@@ -165,7 +165,7 @@
                     <navigationItem key="navigationItem" id="yV4-kK-L1M">
                         <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title="Back" id="Pkp-N3-v8o"/>
-                        <barButtonItem key="leftBarButtonItem" image="map" id="tl1-w3-7Ll">
+                        <barButtonItem key="leftBarButtonItem" image="map5" id="tl1-w3-7Ll">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="WkO-CW-PgN" kind="show" id="6pf-GF-Rjm"/>
@@ -248,7 +248,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="map" width="26" height="30"/>
+        <image name="map5" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="C48-Ck-Fa4"/>
