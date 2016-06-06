@@ -26,8 +26,6 @@ class FavoritesController: UITableViewController {
         populatePossibleFavorites()
         tableView.delegate = self
         tableView.dataSource = self
-        self.tableView.setEditing(true, animated: true)
-        self.tableView.allowsMultipleSelectionDuringEditing = true
     }
     
     func populatePossibleFavorites(){
@@ -35,13 +33,33 @@ class FavoritesController: UITableViewController {
         tableView.reloadData()
     }
     
+    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if let sr = tableView.indexPathsForSelectedRows {
+            if sr.count == possibleFavorites.count-1{
+                let alertController = UIAlertController(title: "What?", message:
+                    "Are you serious mate?", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: {action in
+                }))
+                self.presentViewController(alertController, animated: true, completion: nil)
+                return nil
+            }
+        }
+        return indexPath
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         currentFavorites.append(possibleFavorites[indexPath.row])
+        let cell: UITableViewCell = self.tableView.cellForRowAtIndexPath(indexPath)!
+        cell.accessoryType = UITableViewCellAccessoryType.Checkmark
         enableDisableAddButton()
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         currentFavorites = currentFavorites.filter() { $0 !== possibleFavorites[indexPath.row] }
+        let cell: UITableViewCell = self.tableView.cellForRowAtIndexPath(indexPath)!
+        cell.accessoryType = UITableViewCellAccessoryType.None
+        print(currentFavorites.count)
+
         enableDisableAddButton()
     }
     
@@ -63,7 +81,10 @@ class FavoritesController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath)
-
+        cell.accessoryType = UITableViewCellAccessoryType.None
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1.0)
+        cell.selectedBackgroundView = bgColorView
         cell.textLabel?.text = possibleFavorites[indexPath.row].adress
         cell.detailTextLabel?.text = String(possibleFavorites[indexPath.row].distance) +
             " Meter"  + " - Stativer: " + String(possibleFavorites[indexPath.row].availableSlots) +  " - Sykler: " + String(possibleFavorites[indexPath.row].availableBikes)
