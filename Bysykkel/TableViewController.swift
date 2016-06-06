@@ -51,7 +51,7 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         self.refreshController.addTarget(self, action: #selector(TableViewController.refreshTable), forControlEvents: .ValueChanged)
         
         self.searchController = UISearchController(searchResultsController: self.resultController)
-        self.searchController.dimsBackgroundDuringPresentation = false
+        self.searchController.dimsBackgroundDuringPresentation = true
         self.searchController.searchResultsUpdater = self
         self.searchController.searchBar.barTintColor = UIColor(red: 170/255, green: 50/255, blue: 50/255, alpha: 1.0)
         self.searchController.searchBar.tintColor = UIColor.whiteColor()
