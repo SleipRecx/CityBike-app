@@ -1,9 +1,11 @@
 PODS:
   - Alamofire (3.4.0)
+  - KeepBackgroundCell (0.2.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
+  - KeepBackgroundCell
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
@@ -17,8 +19,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  KeepBackgroundCell: d8f02dbb2bb99f2fcd21b3ab94516c4d54208989
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: b4e2005bd120a97337602f436fa77caef07b8b05
+PODFILE CHECKSUM: 18e9c10466599d374092438eb710f57c7e93991e
 
 COCOAPODS: 1.0.1
