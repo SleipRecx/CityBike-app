@@ -25,12 +25,10 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     var places: [BikePlace] = []
     var filteredPlaces: [BikePlace] = []
     var favorites: [BikePlace] = []
-    var favoritesID: [Int] = []
 
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        fetchFavorites()
 
         let backItem = UIBarButtonItem()
         backItem.title = ""
@@ -40,6 +38,7 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         let searchBarItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(TableViewController.searchPressed))
         searchBarItem.tintColor = UIColor.whiteColor()
         navigationItem.rightBarButtonItem = searchBarItem
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
@@ -67,51 +66,7 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         }
     }
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        self.filteredPlaces =  self.places.filter {place -> Bool in
-            if place.getDisplayString().lowercaseString.containsString(self.searchController.searchBar.text!.lowercaseString){
-                return true
-            }
-            else{
-                return false
-            }
-        }
-        self.resultController.tableView.reloadData();
-    }
-    
-    
-    func saveFavorites(){
-        for fav in favorites{
-            if(self.favoritesID.contains(fav.getID())){
-                
-            }
-            else{
-                favoritesID.append(fav.getID())
-            }
-        }
-        var tmp = ""
-        for favorites in self.favoritesID{
-            tmp = tmp + String(favorites) + ","
-        }
-    
-        // tmp = tmp.substringToIndex(tmp.endIndex.predecessor())
-        NSUserDefaults.standardUserDefaults().setObject(tmp, forKey: "favorites")
-    }
-    
-    func fetchFavorites(){
-        if( NSUserDefaults.standardUserDefaults().objectForKey("favorites") != nil) {
-            let favString = NSUserDefaults.standardUserDefaults().objectForKey("favorites")! as! String
-            favoritesID = []
-            let tmp = favString.characters.split{$0 == ","}.map(String.init)
-            for string in tmp{
-                favoritesID.append(Int(string)!)
-            }
-        }
-        
-    }
-    
-    
-       func fetchJSON(){
+    func fetchJSON(){
         let API_URL: String = "http://map.webservice.sharebike.com:8888/json/MapService/LiveStationData?APIKey=" +
         "3EFC0CF3-4E99-40E2-9E42-B95C2EDE6C3C&SystemID=citytrondheim"
         let myLocation = locationManager.location!
@@ -136,13 +91,9 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
                         }
                         let object = BikePlace(availableBikes: bikes,availableSlots: slots, adress: adress,online: online,location: location, distance: distance)
                         self.places.append(object)
-                        if(self.favoritesID.contains(Int(adress.componentsSeparatedByString("-")[0])!)){
-                            self.favorites.append(object)
-                        }
                     }
-                    
+                    self.fetchFavorites()
                     self.places.sortInPlace({$0.distance < $1.distance})
-                    self.favorites.sortInPlace({$0.distance < $1.distance})
                     self.tableView.reloadData()
                     
                 }
@@ -154,15 +105,36 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         
     }
     
-    func searchPressed(){
-        if self.tableView.tableHeaderView == self.searchController.searchBar{
-            self.tableView.tableHeaderView = nil
+  
+    func saveFavorites(){
+        var tmp = ""
+        for favorite in favorites{
+            tmp = tmp + String(favorite.id) + ","
+            print("faen")
         }
-        else{
-            self.presentViewController(searchController, animated: true, completion: nil)
-        }
-        
+        NSUserDefaults.standardUserDefaults().setObject(tmp, forKey: "favorites")
     }
+    
+    
+    func fetchFavorites(){
+        var favoritesID : [Int] = []
+        if( NSUserDefaults.standardUserDefaults().objectForKey("favorites") != nil) {
+            let favString = NSUserDefaults.standardUserDefaults().objectForKey("favorites")! as! String
+            let tmp = favString.characters.split{$0 == ","}.map(String.init)
+            for string in tmp{
+                favoritesID.append(Int(string)!)
+            }
+        }
+        for place in places{
+            if(favoritesID.contains(place.id)){
+                favorites.append(place)
+            }
+        }
+        favorites.sortInPlace({$0.distance < $1.distance})
+    }
+    
+  
+    // IBAction Methods
     
     @IBAction func mySegmentedControlPressed(sender: AnyObject) {
         if(mySegmentedControl.selectedSegmentIndex == 1){
@@ -178,70 +150,21 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         self.tableView.reloadData()
     }
     
-    func performPopover(){
-        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewControllerWithIdentifier("FavoritesViewController") as! UINavigationController
-        let  destinationController = controller.topViewController as! FavoritesController
-        destinationController.currentFavorites = self.favorites
-        destinationController.places = self.places
-        destinationController.favoritesCountStart = self.favorites.count
-        destinationController.passDataBack = {[weak self]
-            (data) in
-            if self != nil {
-                self!.favorites = data
-                self!.saveFavorites()
-                self!.favorites.sortInPlace({$0.distance < $1.distance})
-                self!.tableView.reloadData()
-            }
+    func searchPressed(){
+        if self.tableView.tableHeaderView == self.searchController.searchBar{
+            self.tableView.tableHeaderView = nil
         }
-        
-        
-        self.presentViewController(controller, animated: true, completion: nil)
-    }
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "mySegue"){
-            let cell = sender as? CustomCell
-            let index = self.places.indexOf({$0.id == cell!.id})!
-            let secondViewController = segue.destinationViewController as! MapViewController
-            secondViewController.currentPlace.append(self.places[index])
-            secondViewController.places = self.places
-        }
-            
         else{
-            let secondViewController = segue.destinationViewController as! MapViewController
-            secondViewController.places = self.places
+            self.presentViewController(searchController, animated: true, completion: nil)
         }
-    }
-
-    
-    func refreshTable(){
-        self.refreshControl?.beginRefreshing()
-        self.places.removeAll()
-        self.filteredPlaces.removeAll()
-        self.favorites.removeAll()
-        fetchJSON()
-        self.tableView.reloadData()
-        self.refreshController.endRefreshing()
+        
     }
     
-   
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let unFav = UITableViewRowAction(style: .Normal, title: "Fjern"){(
-            action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
-            self.favoritesID.removeAtIndex(self.favoritesID.indexOf(self.favorites[indexPath.row].id)!)
-            self.favorites.removeAtIndex(self.favorites.indexOf(self.favorites[indexPath.row])!)
-            self.favorites.sortInPlace({$0.distance < $1.distance})
-            self.tableView.reloadData()
-            self.saveFavorites()
-        }
-        unFav.backgroundColor = UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
-        return [unFav]
-    }
     
-
+    // TableView Methods
+    
+    
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         if(mySegmentedControl.selectedSegmentIndex == 1){
             return true
@@ -254,20 +177,76 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     }
     
     
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let unFav = UITableViewRowAction(style: .Normal, title: "Fjern"){(
+            action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+            self.favorites.removeAtIndex(self.favorites.indexOf(self.favorites[indexPath.row])!)
+            self.favorites.sortInPlace({$0.distance < $1.distance})
+            self.tableView.reloadData()
+            self.saveFavorites()
+        }
+        unFav.backgroundColor = UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
+        return [unFav]
+    }
+    
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        tableView.rowHeight = 51
+        let cell:CustomCell = self.tableView.dequeueReusableCellWithIdentifier("myCell")! as! CustomCell
+        let array: [BikePlace] = self.getCurrentTableViewArray()
+        cell.id = array[indexPath.row].id
+        cell.img.backgroundColor = getCellColor(array[indexPath.row])
+        cell.accessoryType = UITableViewCellAccessoryType.None
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1.0)
+        cell.selectedBackgroundView = bgColorView
+        addExtraMarks(cell, place: array[indexPath.row])
+        return cell
+        
+    }
+    
+    // TableView support methods
+    
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        self.filteredPlaces =  self.places.filter {place -> Bool in
+            if place.getDisplayString().lowercaseString.containsString(self.searchController.searchBar.text!.lowercaseString){
+                return true
+            }
+            else{
+                return false
+            }
+        }
+        self.resultController.tableView.reloadData();
+    }
+    
+    
+    func refreshTable(){
+        self.refreshControl?.beginRefreshing()
+        self.places.removeAll()
+        self.filteredPlaces.removeAll()
+        self.favorites.removeAll()
+        fetchJSON()
+        self.tableView.reloadData()
+        self.refreshController.endRefreshing()
+    }
+    
+    
+    
     func getCurrentTableViewArray()->[BikePlace]{
         if(mySegmentedControl.selectedSegmentIndex == 1){
             return self.favorites
         }
         if(filteredPlaces.count > 0){
-             return self.filteredPlaces
+            return self.filteredPlaces
         }
         else {
             return self.places
         }
-       
+        
     }
-
-  
+    
+    
     func getCellColor(place:BikePlace) -> UIColor{
         if(place.availableBikes == 0){
             return UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
@@ -304,23 +283,41 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         
     }
     
+    // Transfer data between Views
     
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        tableView.rowHeight = 51
-        let cell:CustomCell = self.tableView.dequeueReusableCellWithIdentifier("myCell")! as! CustomCell
-        let array: [BikePlace] = self.getCurrentTableViewArray()
-        cell.id = array[indexPath.row].id
-        cell.img.backgroundColor = getCellColor(array[indexPath.row])
-        cell.accessoryType = UITableViewCellAccessoryType.None
-        let bgColorView = UIView()
-        bgColorView.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1.0)
-        cell.selectedBackgroundView = bgColorView
-        addExtraMarks(cell, place: array[indexPath.row])
-        return cell
-        
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "mySegue"){
+            let cell = sender as? CustomCell
+            let index = self.places.indexOf({$0.id == cell!.id})!
+            let secondViewController = segue.destinationViewController as! MapViewController
+            secondViewController.currentPlace.append(self.places[index])
+            secondViewController.places = self.places
+        }
+            
+        else{
+            let secondViewController = segue.destinationViewController as! MapViewController
+            secondViewController.places = self.places
+        }
     }
     
+    
+    func performPopover(){
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewControllerWithIdentifier("FavoritesViewController") as! UINavigationController
+        let  destinationController = controller.topViewController as! FavoritesController
+        destinationController.currentFavorites = self.favorites
+        destinationController.places = self.places
+        destinationController.favoritesCountStart = self.favorites.count
+        destinationController.passDataBack = {[weak self]
+            (data) in
+            if self != nil {
+                self!.favorites = data
+                self!.saveFavorites()
+                self!.tableView.reloadData()
+            }
+        }
+        self.presentViewController(controller, animated: true, completion: nil)
+    }
     
   
     
