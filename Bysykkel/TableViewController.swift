@@ -72,11 +72,20 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     
     
     func saveFavorites(){
+        for fav in favorites{
+            if(self.favoritesID.contains(fav.getID())){
+                
+            }
+            else{
+                favoritesID.append(fav.getID())
+            }
+        }
         var tmp = ""
         for favorites in self.favoritesID{
             tmp = tmp + String(favorites) + ","
         }
-        tmp = tmp.substringToIndex(tmp.endIndex.predecessor())
+    
+        // tmp = tmp.substringToIndex(tmp.endIndex.predecessor())
         NSUserDefaults.standardUserDefaults().setObject(tmp, forKey: "favorites")
     }
     
@@ -162,8 +171,23 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     
     func performPopover(){
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc: UINavigationController = storyboard.instantiateViewControllerWithIdentifier("FavoritesViewController") as! UINavigationController
-        self.presentViewController(vc, animated: true, completion: nil)
+        let controller = storyboard.instantiateViewControllerWithIdentifier("FavoritesViewController") as! UINavigationController
+        let  destinationController = controller.topViewController as! FavoritesController
+        destinationController.currentFavorites = self.favorites
+        destinationController.places = self.places
+        destinationController.favoritesCountStart = self.favorites.count
+        destinationController.passDataBack = {[weak self]
+            (data) in
+            if self != nil {
+                self!.favorites = data
+                self!.saveFavorites()
+                self!.favorites.sortInPlace({$0.distance < $1.distance})
+                self!.tableView.reloadData()
+            }
+        }
+        
+        
+        self.presentViewController(controller, animated: true, completion: nil)
     }
     
     
@@ -177,7 +201,6 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         }
             
         else{
-            
             let secondViewController = segue.destinationViewController as! MapViewController
             secondViewController.places = self.places
         }
@@ -195,39 +218,24 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        if (self.favoritesID.contains(self.places[indexPath.row].id)){
-            let fav = UITableViewRowAction(style: .Normal, title: "Unfavorite"){(
-                action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
-                self.favoritesID.removeAtIndex(self.favoritesID.indexOf(self.places[indexPath.row].id)!)
-                self.favorites.removeAtIndex(self.favorites.indexOf(self.places[indexPath.row])!)
-                self.favorites.sortInPlace({$0.distance < $1.distance})
-                self.tableView.reloadData()
-                self.saveFavorites()
-            }
-            fav.backgroundColor = UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
-            return [fav]
+        let unFav = UITableViewRowAction(style: .Normal, title: "Fjern"){(
+            action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+            self.favoritesID.removeAtIndex(self.favoritesID.indexOf(self.favorites[indexPath.row].id)!)
+            self.favorites.removeAtIndex(self.favorites.indexOf(self.favorites[indexPath.row])!)
+            self.favorites.sortInPlace({$0.distance < $1.distance})
+            self.tableView.reloadData()
+            self.saveFavorites()
         }
-            
-        else{
-            let fav = UITableViewRowAction(style: .Normal, title: "Favorite"){(
-                action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
-                self.favoritesID.append(self.places[indexPath.row].id)
-                self.favorites.append(self.places[indexPath.row])
-                self.saveFavorites()
-                self.favorites.sortInPlace({$0.distance < $1.distance})
-                self.tableView.reloadData()
-            }
-            fav.backgroundColor = UIColor(red: 52/255, green: 168/255, blue: 83/255, alpha: 1)
-            return [fav]
-        }
+        unFav.backgroundColor = UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
+        return [unFav]
     }
     
 
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         if(mySegmentedControl.selectedSegmentIndex == 1){
-            return false
+            return true
         }
-        return true
+        return false
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
