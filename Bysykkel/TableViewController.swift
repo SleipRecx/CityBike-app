@@ -266,44 +266,59 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     }
 
   
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:CustomCell = self.tableView.dequeueReusableCellWithIdentifier("myCell")! as! CustomCell
-        let hour = NSCalendar.currentCalendar().component(.Hour, fromDate: NSDate())
-        tableView.rowHeight = 51
-        let array: [BikePlace] = self.getCurrentTableViewArray()
-        
-        if hour < 6{
-            cell.one.text = array[indexPath.row].getDisplayString() + " [Stengt]"
+    func getCellColor(place:BikePlace) -> UIColor{
+        if(place.availableBikes == 0){
+            return UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
+        }
+        else if(place.availableSlots == 0){
+            return UIColor.grayColor()
+        }
+        else if (place.availableBikes < 5){
+            return UIColor(red: 251/255, green: 188/255, blue: 5/255, alpha: 1)
         }
         else{
-            cell.one.text = array[indexPath.row].getDisplayString()
+            return UIColor(red: 52/255, green: 168/255, blue: 83/255, alpha: 1)
         }
-        
-        if(self.places[indexPath.row].distance > 10000){
-            cell.two.text = String(array[indexPath.row].distance/1000) +
-                " Kilometer"  + " - Stativer: " + String(array[indexPath.row].availableSlots) +  " - Sykler: " + String(array[indexPath.row].availableBikes)
-        }
-        else{
-            cell.two.text = String(array[indexPath.row].distance) +
-                " Meter"  + " - Stativer: " + String(array[indexPath.row].availableSlots) +  " - Sykler: " + String(array[indexPath.row].availableBikes)
-        }
-        
-        if(array[indexPath.row].availableBikes == 0){
-            cell.img.backgroundColor =  UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
-        }
-        else if(array[indexPath.row].availableSlots == 0){
-            cell.img.backgroundColor =  UIColor.grayColor()
-        }
-        else if (array[indexPath.row].availableBikes < 5){
-            cell.img.backgroundColor =  UIColor(red: 251/255, green: 188/255, blue: 5/255, alpha: 1)
-        }
-        else{
-            cell.img.backgroundColor =  UIColor(red: 52/255, green: 168/255, blue: 83/255, alpha: 1)
-        }
-        cell.id = array[indexPath.row].id
-
-        return cell
     }
+    
+    func addExtraMarks(cell: CustomCell, place: BikePlace){
+        let hour = NSCalendar.currentCalendar().component(.Hour, fromDate: NSDate())
+        if hour < 6{
+            cell.one.text = place.getDisplayString() + " [Stengt]"
+        }
+            
+        else{
+            cell.one.text = place.getDisplayString()
+        }
+        
+        if(place.distance > 10000){
+            cell.two.text = String(place.distance/1000) +
+                " Kilometer"  + " - Stativer: " + String(place.availableSlots) +  " - Sykler: " + String(place.availableBikes)
+        }
+        else{
+            cell.two.text = String(place.distance) +
+                " Meter"  + " - Stativer: " + String(place.availableSlots) +  " - Sykler: " + String(place.availableBikes)
+        }
+        
+    }
+    
+    
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        tableView.rowHeight = 51
+        let cell:CustomCell = self.tableView.dequeueReusableCellWithIdentifier("myCell")! as! CustomCell
+        let array: [BikePlace] = self.getCurrentTableViewArray()
+        cell.id = array[indexPath.row].id
+        cell.img.backgroundColor = getCellColor(array[indexPath.row])
+        cell.accessoryType = UITableViewCellAccessoryType.None
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1.0)
+        cell.selectedBackgroundView = bgColorView
+        addExtraMarks(cell, place: array[indexPath.row])
+        return cell
+        
+    }
+    
     
   
     
