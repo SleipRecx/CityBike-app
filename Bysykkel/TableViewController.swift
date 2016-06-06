@@ -226,6 +226,12 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         self.refreshController.endRefreshing()
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell: CustomCell = self.tableView.cellForRowAtIndexPath(indexPath) as! CustomCell
+        cell.img.backgroundColor = getCellColor(getCurrentTableViewArray()[indexPath.row])
+     
+    }
+    
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let unFav = UITableViewRowAction(style: .Normal, title: "Fjern"){(
             action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
