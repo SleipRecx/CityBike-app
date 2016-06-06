@@ -49,9 +49,6 @@ class FavoritesController: UITableViewController {
         currentFavorites.append(possibleFavorites[indexPath.row])
         let cell: CustomCell = self.tableView.cellForRowAtIndexPath(indexPath) as! CustomCell
         cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-        
-        
-        cell.img.backgroundColor = getCellColor(possibleFavorites[indexPath.row])
         enableDisableAddButton()
     }
     
@@ -123,7 +120,7 @@ class FavoritesController: UITableViewController {
         cell.img.backgroundColor = getCellColor(array[indexPath.row])
         cell.accessoryType = UITableViewCellAccessoryType.None
         let bgColorView = UIView()
-        bgColorView.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1.0)
+        bgColorView.backgroundColor = UIColor(red: 239/255, green: 239/255, blue: 239/255, alpha: 1.0)
         cell.selectedBackgroundView = bgColorView
         addExtraMarks(cell, place: array[indexPath.row])
         
