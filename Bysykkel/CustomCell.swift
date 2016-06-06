@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KeepBackgroundCell
 
 class CustomCell: UITableViewCell {
 
@@ -17,6 +18,7 @@ class CustomCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.keepSubviewBackground = true
         img.layer.cornerRadius = img.frame.size.width/2
         img.clipsToBounds = true
        
@@ -26,5 +28,6 @@ class CustomCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
+    
 
 }
