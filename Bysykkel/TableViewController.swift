@@ -53,7 +53,7 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         self.searchController = UISearchController(searchResultsController: self.resultController)
         self.searchController.dimsBackgroundDuringPresentation = false
         self.searchController.searchResultsUpdater = self
-        self.searchController.searchBar.barTintColor = UIColor(red: 165/255, green: 30/255, blue: 34/255, alpha: 1.0)
+        self.searchController.searchBar.barTintColor = UIColor(red: 170/255, green: 50/255, blue: 50/255, alpha: 1.0)
         self.searchController.searchBar.tintColor = UIColor.whiteColor()
         definesPresentationContext = true
         
