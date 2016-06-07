@@ -13,6 +13,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var shouldSupportAllOrientation = false
+    
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -21,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //self.window?.tintColor = UIColor.whiteColor()
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         return true
-
     }
     
     func applicationWillResignActive(application: UIApplication) {
@@ -46,6 +47,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
     }
+    
+    //Handles Orientation problem
+    
+    
+    
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+        if (shouldSupportAllOrientation == true){
+            return UIInterfaceOrientationMask.All
+        }
+        return UIInterfaceOrientationMask.Portrait
+    }
+
     
     
 }
