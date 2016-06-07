@@ -1,5 +1,5 @@
 //
-//  BikePlace.swift
+//  Bikeself.swift
 //  Bysykkel
 //
 //  Created by Markus Andresen on 03/05/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreLocation
-
+import UIKit
 class BikePlace : Equatable {
     var availableBikes: Int
     var availableSlots: Int
@@ -38,6 +38,21 @@ class BikePlace : Equatable {
     
     func getID()->Int{
         return self.id
+    }
+    
+    func getColorCode() -> UIColor {
+        if(self.availableBikes == 0){
+            return UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
+        }
+        else if(self.availableSlots == 0){
+            return UIColor.grayColor()
+        }
+        else if (self.availableBikes < 5){
+            return UIColor(red: 251/255, green: 188/255, blue: 5/255, alpha: 1)
+        }
+        else{
+            return UIColor(red: 52/255, green: 168/255, blue: 83/255, alpha: 1)
+        }
     }
     
 }
