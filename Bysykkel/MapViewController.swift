@@ -22,6 +22,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appdelegate.shouldSupportAllOrientation = true
+        
         map.delegate = self
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         populateMap()
