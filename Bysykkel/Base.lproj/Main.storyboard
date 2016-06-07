@@ -17,11 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mUR-nD-lmZ">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mUR-nD-lmZ">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mUR-nD-lmZ" firstAttribute="top" secondItem="nTE-DV-gvs" secondAttribute="bottom" id="3Zk-WY-7ek"/>
+                            <constraint firstItem="mUR-nD-lmZ" firstAttribute="bottom" secondItem="RjA-cO-7EI" secondAttribute="top" id="JZb-fq-rZL"/>
+                            <constraint firstAttribute="trailing" secondItem="mUR-nD-lmZ" secondAttribute="trailing" id="YKg-7U-W72"/>
+                            <constraint firstItem="mUR-nD-lmZ" firstAttribute="leading" secondItem="Kmn-4L-VbW" secondAttribute="leading" id="y2c-yH-ezY"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Bysykkel Kart" id="G1P-kq-KKM">
@@ -40,7 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghe-0T-5UW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1574.5" y="292.5"/>
+            <point key="canvasLocation" x="1548.5" y="292.5"/>
         </scene>
         <!--Legg til Favoritter-->
         <scene sceneID="1Fu-Mg-P9h">
@@ -165,14 +171,14 @@
                     <navigationItem key="navigationItem" id="yV4-kK-L1M">
                         <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title="Back" id="Pkp-N3-v8o"/>
-                        <barButtonItem key="leftBarButtonItem" image="map5" id="tl1-w3-7Ll">
+                        <barButtonItem key="leftBarButtonItem" image="map" id="tl1-w3-7Ll">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="WkO-CW-PgN" kind="show" id="6pf-GF-Rjm"/>
                             </connections>
                         </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" id="MRl-oe-ocJ">
-                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <rect key="frame" x="115" y="7" width="145" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Alle"/>
@@ -184,11 +190,6 @@
                             </connections>
                         </segmentedControl>
                     </navigationItem>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="barPosition">
-                            <integer key="value" value="10"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="mySegmentedControl" destination="MRl-oe-ocJ" id="ReL-30-oG6"/>
                     </connections>
@@ -248,7 +249,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="map5" width="40" height="40"/>
+        <image name="map" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="C48-Ck-Fa4"/>
