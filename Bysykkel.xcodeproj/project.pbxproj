@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		221A12BD1D075FA0001873C1 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224FCEA31D031E970080A306 /* Alamofire.framework */; };
-		221A12BE1D075FA0001873C1 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 224FCEA31D031E970080A306 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		221A12BF1D075FA4001873C1 /* Pods_Bysykkel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43964A5C70BB4F7FBE97BE0 /* Pods_Bysykkel.framework */; };
-		221A12C01D075FA4001873C1 /* Pods_Bysykkel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D43964A5C70BB4F7FBE97BE0 /* Pods_Bysykkel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		221A12C11D075FA6001873C1 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224FCEA41D031E970080A306 /* SwiftyJSON.framework */; };
-		221A12C21D075FA6001873C1 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 224FCEA41D031E970080A306 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22609D1A1D046A860042B98E /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22609D191D046A860042B98E /* FavoritesController.swift */; };
 		22667CA71CD7BEE2005F3D66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22667CA61CD7BEE2005F3D66 /* AppDelegate.swift */; };
 		22667CAC1CD7BEE2005F3D66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22667CAA1CD7BEE2005F3D66 /* Main.storyboard */; };
@@ -33,10 +27,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				221A12C21D075FA6001873C1 /* SwiftyJSON.framework in Embed Frameworks */,
 				226C5B5C1D032A0800AE3015 /* (null) in Embed Frameworks */,
-				221A12BE1D075FA0001873C1 /* Alamofire.framework in Embed Frameworks */,
-				221A12C01D075FA4001873C1 /* Pods_Bysykkel.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,9 +59,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				221A12BF1D075FA4001873C1 /* Pods_Bysykkel.framework in Frameworks */,
-				221A12BD1D075FA0001873C1 /* Alamofire.framework in Frameworks */,
-				221A12C11D075FA6001873C1 /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
