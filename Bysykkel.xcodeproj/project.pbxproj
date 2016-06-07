@@ -7,22 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		224FCEA51D031E970080A306 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224FCEA31D031E970080A306 /* Alamofire.framework */; };
-		224FCEA61D031E970080A306 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224FCEA41D031E970080A306 /* SwiftyJSON.framework */; };
+		221A12BD1D075FA0001873C1 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224FCEA31D031E970080A306 /* Alamofire.framework */; };
+		221A12BE1D075FA0001873C1 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 224FCEA31D031E970080A306 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		221A12BF1D075FA4001873C1 /* Pods_Bysykkel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43964A5C70BB4F7FBE97BE0 /* Pods_Bysykkel.framework */; };
+		221A12C01D075FA4001873C1 /* Pods_Bysykkel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D43964A5C70BB4F7FBE97BE0 /* Pods_Bysykkel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		221A12C11D075FA6001873C1 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224FCEA41D031E970080A306 /* SwiftyJSON.framework */; };
+		221A12C21D075FA6001873C1 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 224FCEA41D031E970080A306 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22609D1A1D046A860042B98E /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22609D191D046A860042B98E /* FavoritesController.swift */; };
 		22667CA71CD7BEE2005F3D66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22667CA61CD7BEE2005F3D66 /* AppDelegate.swift */; };
 		22667CAC1CD7BEE2005F3D66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22667CAA1CD7BEE2005F3D66 /* Main.storyboard */; };
 		22667CAE1CD7BEE2005F3D66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22667CAD1CD7BEE2005F3D66 /* Assets.xcassets */; };
 		22667CB11CD7BEE2005F3D66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22667CAF1CD7BEE2005F3D66 /* LaunchScreen.storyboard */; };
-		226C5B581D032A0800AE3015 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 224FCEA31D031E970080A306 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		226C5B5A1D032A0800AE3015 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 224FCEA41D031E970080A306 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		226C5B5C1D032A0800AE3015 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2274E6011CD8ECC500BA002F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2274E6001CD8ECC500BA002F /* MapViewController.swift */; };
 		22965D801CE14B340031F735 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22965D7F1CE14B340031F735 /* CustomCell.swift */; };
 		22D8345F1CD8A21800B4AD1D /* BikePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8345E1CD8A21800B4AD1D /* BikePlace.swift */; };
 		22F933F81D06D5010044C72B /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F933F71D06D5010044C72B /* CustomAnnotation.swift */; };
 		22F933FC1D06E76C0044C72B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F933FB1D06E76C0044C72B /* TableViewController.swift */; };
-		7F218091F19E86D103B51CFB /* Pods_Bysykkel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43964A5C70BB4F7FBE97BE0 /* Pods_Bysykkel.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,9 +33,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				226C5B5A1D032A0800AE3015 /* SwiftyJSON.framework in Embed Frameworks */,
-				226C5B581D032A0800AE3015 /* Alamofire.framework in Embed Frameworks */,
+				221A12C21D075FA6001873C1 /* SwiftyJSON.framework in Embed Frameworks */,
 				226C5B5C1D032A0800AE3015 /* (null) in Embed Frameworks */,
+				221A12BE1D075FA0001873C1 /* Alamofire.framework in Embed Frameworks */,
+				221A12C01D075FA4001873C1 /* Pods_Bysykkel.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,9 +68,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				224FCEA51D031E970080A306 /* Alamofire.framework in Frameworks */,
-				224FCEA61D031E970080A306 /* SwiftyJSON.framework in Frameworks */,
-				7F218091F19E86D103B51CFB /* Pods_Bysykkel.framework in Frameworks */,
+				221A12BF1D075FA4001873C1 /* Pods_Bysykkel.framework in Frameworks */,
+				221A12BD1D075FA0001873C1 /* Alamofire.framework in Frameworks */,
+				221A12C11D075FA6001873C1 /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
