@@ -15,6 +15,10 @@
 		226C5B5C1D032A0800AE3015 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2274E6011CD8ECC500BA002F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2274E6001CD8ECC500BA002F /* MapViewController.swift */; };
 		22965D801CE14B340031F735 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22965D7F1CE14B340031F735 /* CustomCell.swift */; };
+		22BC523B1D0765ED00256418 /* Pods_Bysykkel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43964A5C70BB4F7FBE97BE0 /* Pods_Bysykkel.framework */; };
+		22BC523F1D0765ED00256418 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BC523C1D0765ED00256418 /* Alamofire.framework */; };
+		22BC52401D0765ED00256418 /* KeepBackgroundCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BC523D1D0765ED00256418 /* KeepBackgroundCell.framework */; };
+		22BC52411D0765ED00256418 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BC523E1D0765ED00256418 /* SwiftyJSON.framework */; };
 		22D8345F1CD8A21800B4AD1D /* BikePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8345E1CD8A21800B4AD1D /* BikePlace.swift */; };
 		22F933F81D06D5010044C72B /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F933F71D06D5010044C72B /* CustomAnnotation.swift */; };
 		22F933FC1D06E76C0044C72B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F933FB1D06E76C0044C72B /* TableViewController.swift */; };
@@ -46,6 +50,9 @@
 		22667CB21CD7BEE2005F3D66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2274E6001CD8ECC500BA002F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		22965D7F1CE14B340031F735 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		22BC523C1D0765ED00256418 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Bysykkel-hjzkmfjejcyjzyguoeqlydtkeoxx/Build/Products/Debug-iphoneos/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		22BC523D1D0765ED00256418 /* KeepBackgroundCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeepBackgroundCell.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Bysykkel-hjzkmfjejcyjzyguoeqlydtkeoxx/Build/Products/Debug-iphoneos/KeepBackgroundCell/KeepBackgroundCell.framework"; sourceTree = "<group>"; };
+		22BC523E1D0765ED00256418 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Bysykkel-hjzkmfjejcyjzyguoeqlydtkeoxx/Build/Products/Debug-iphoneos/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		22D8345E1CD8A21800B4AD1D /* BikePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikePlace.swift; sourceTree = "<group>"; };
 		22F933F71D06D5010044C72B /* CustomAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		22F933FB1D06E76C0044C72B /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +66,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22BC523F1D0765ED00256418 /* Alamofire.framework in Frameworks */,
+				22BC52401D0765ED00256418 /* KeepBackgroundCell.framework in Frameworks */,
+				22BC52411D0765ED00256418 /* SwiftyJSON.framework in Frameworks */,
+				22BC523B1D0765ED00256418 /* Pods_Bysykkel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +79,9 @@
 		03FAF73D6AC2AC710F284292 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22BC523C1D0765ED00256418 /* Alamofire.framework */,
+				22BC523D1D0765ED00256418 /* KeepBackgroundCell.framework */,
+				22BC523E1D0765ED00256418 /* SwiftyJSON.framework */,
 				224FCEA31D031E970080A306 /* Alamofire.framework */,
 				224FCEA41D031E970080A306 /* SwiftyJSON.framework */,
 				D43964A5C70BB4F7FBE97BE0 /* Pods_Bysykkel.framework */,
