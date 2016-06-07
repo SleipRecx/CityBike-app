@@ -13,7 +13,7 @@ import Alamofire
 import SwiftyJSON
 
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var map: MKMapView!
     let locationManager = CLLocationManager()
@@ -22,6 +22,7 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        map.delegate = self
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         populateMap()
         if(currentPlace.count > 0){
@@ -36,6 +37,8 @@ class MapViewController: UIViewController {
         }
         self.map.showsUserLocation = true
     }
+    
+    
     
     func selectAnnotation(){
         let span = MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007)
@@ -58,16 +61,78 @@ class MapViewController: UIViewController {
         map.removeAnnotations(annotationsToRemove)
         fetchJSON()
     }
-
     
+    
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        let colorPointAnnotation = annotation as! CustomAnnotation
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        }
+        else {
+            pinView?.annotation = annotation
+        }
+
+        pinView!.canShowCallout = true
+        pinView?.animatesDrop = true
+        pinView?.pinTintColor = colorPointAnnotation.pinColor
+        return pinView
+    }
+    
+    
+    
+    
+    
+    /* Custom annotation image
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+ 
+        
+        let reuseIdentifier = "pin"
+      
+        
+        var v = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseIdentifier)
+        if v == nil {
+            v = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            v!.canShowCallout = true
+            
+        }
+        else {
+            v!.annotation = annotation
+        }
+        
+        if(annotation.isKindOfClass(MKUserLocation)){
+          return nil
+        }
+        let customPointAnnotation = annotation as! CustomAnnotation
+        v!.image = UIImage(named:customPointAnnotation.pinCustomImageName)
+
+        
+        return v
+    }
+ */
+    
+    
+  
+  
+
     func populateMap(){
+        var annotationView:MKPinAnnotationView!
         for place in places{
             let location = place.location
-            let annotation = MKPointAnnotation()
+            let annotation = CustomAnnotation(pinColor: place.getColorCode())
+            //annotation.pinCustomImageName = "test"
             annotation.coordinate = location.coordinate
             annotation.title = place.adress
             annotation.subtitle = "Sykler: " + String(place.availableBikes) + " Låser: " + String(place.availableSlots)
-            map.addAnnotation(annotation)
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            self.map.addAnnotation(annotationView.annotation!)
+           
         }
      
     }
@@ -99,6 +164,7 @@ class MapViewController: UIViewController {
                         self.places.append(object)
                        
                     }
+                    
                     self.populateMap()
                     if(self.currentPlace.count > 0){
                         self.selectAnnotation()
