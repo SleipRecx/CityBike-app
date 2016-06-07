@@ -1,0 +1,6 @@
+framework module KeepBackgroundCell {
+  umbrella header "KeepBackgroundCell-umbrella.h"
+
+  export *
+  module * { export * }
+}
