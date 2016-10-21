@@ -17,7 +17,7 @@ class FavoritesController: UITableViewController {
     
     @IBOutlet weak var addButton: UIBarButtonItem!
     
-    var passDataBack: ((data: [BikePlace]) -> ())?
+    var passDataBack: ((_ data: [BikePlace]) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,55 +31,55 @@ class FavoritesController: UITableViewController {
         tableView.reloadData()
     }
     
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         if let sr = tableView.indexPathsForSelectedRows {
             if sr.count == possibleFavorites.count-1{
                 let alertController = UIAlertController(title: "What?", message:
-                    "Are you serious mate?", preferredStyle: .Alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: {action in
+                    "That's just stupid", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {action in
                 }))
-                self.presentViewController(alertController, animated: true, completion: nil)
+                self.present(alertController, animated: true, completion: nil)
                 return nil
             }
         }
         return indexPath
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        currentFavorites.append(possibleFavorites[indexPath.row])
-        let cell: CustomCell = self.tableView.cellForRowAtIndexPath(indexPath) as! CustomCell
-        cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        currentFavorites.append(possibleFavorites[(indexPath as NSIndexPath).row])
+        let cell: CustomCell = self.tableView.cellForRow(at: indexPath) as! CustomCell
+        cell.accessoryType = UITableViewCellAccessoryType.checkmark
         enableDisableAddButton()
     }
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        currentFavorites = currentFavorites.filter() { $0 !== possibleFavorites[indexPath.row] }
-        let cell: UITableViewCell = self.tableView.cellForRowAtIndexPath(indexPath)!
-        cell.accessoryType = UITableViewCellAccessoryType.None
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        currentFavorites = currentFavorites.filter() { $0 !== possibleFavorites[(indexPath as NSIndexPath).row] }
+        let cell: UITableViewCell = self.tableView.cellForRow(at: indexPath)!
+        cell.accessoryType = UITableViewCellAccessoryType.none
         enableDisableAddButton()
     }
     
     func enableDisableAddButton(){
         if(currentFavorites.count > favoritesCountStart){
-            addButton.enabled = true
+            addButton.isEnabled = true
         }
         else{
-            addButton.enabled = false
+            addButton.isEnabled = false
         }
     }
 
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return possibleFavorites.count
     }
     
     
-    func getCellColor(place:BikePlace) -> UIColor{
+    func getCellColor(_ place:BikePlace) -> UIColor{
         if(place.availableBikes == 0){
             return UIColor(red: 234/255, green: 67/255, blue: 53/255, alpha: 1)
         }
         else if(place.availableSlots == 0){
-            return UIColor.grayColor()
+            return UIColor.gray
         }
         else if (place.availableBikes < 5){
             return UIColor(red: 251/255, green: 188/255, blue: 5/255, alpha: 1)
@@ -89,10 +89,11 @@ class FavoritesController: UITableViewController {
         }
     }
     
-    func addExtraMarks(cell: CustomCell, place: BikePlace){
-        let hour = NSCalendar.currentCalendar().component(.Hour, fromDate: NSDate())
+    
+    func addExtraMarks(_ cell: CustomCell, place: BikePlace){
+        let hour = (Calendar.current as NSCalendar).component(.hour, from: Date())
         if hour < 6{
-            cell.one.text = place.getDisplayString() + " [Stengt]"
+            cell.one.text = place.getDisplayString()  // stengt
         }
             
         else{
@@ -100,42 +101,43 @@ class FavoritesController: UITableViewController {
         }
         
         if(place.distance > 10000){
-            cell.two.text = String(place.distance/1000) +
-                " Kilometer"  + " - Stativer: " + String(place.availableSlots) +  " - Sykler: " + String(place.availableBikes)
+            cell.two.text = String(place.distance/1000) + " Kilometer"
         }
         else{
             cell.two.text = String(place.distance) +
-                " Meter"  + " - Stativer: " + String(place.availableSlots) +  " - Sykler: " + String(place.availableBikes)
+            " Meter"
         }
-
+        cell.three.text =   String(place.availableBikes)
+        cell.four.text! =  String(place.availableSlots)
+        
+        
     }
+
     
-    
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.rowHeight = 51
-        let cell:CustomCell = self.tableView.dequeueReusableCellWithIdentifier("myCell")! as! CustomCell
+        let cell:CustomCell = self.tableView.dequeueReusableCell(withIdentifier: "myCell")! as! CustomCell
         let array: [BikePlace] = self.possibleFavorites
-        cell.id = array[indexPath.row].id
-        cell.img.backgroundColor = getCellColor(array[indexPath.row])
-        cell.accessoryType = UITableViewCellAccessoryType.None
+        cell.id = array[(indexPath as NSIndexPath).row].id
+        cell.img.backgroundColor = getCellColor(array[(indexPath as NSIndexPath).row])
+        cell.accessoryType = UITableViewCellAccessoryType.none
         let bgColorView = UIView()
         bgColorView.backgroundColor = UIColor(red: 239/255, green: 239/255, blue: 239/255, alpha: 1.0)
         cell.selectedBackgroundView = bgColorView
-        addExtraMarks(cell, place: array[indexPath.row])
+        addExtraMarks(cell, place: array[(indexPath as NSIndexPath).row])
         
         return cell
 
     }
     
 
-    @IBAction func dismiss(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func dismiss(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func addButtonPressed(sender: AnyObject) {
-        self.passDataBack?(data: currentFavorites)
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func addButtonPressed(_ sender: AnyObject) {
+        self.passDataBack?(currentFavorites)
+        self.dismiss(animated: true, completion: nil)
     }
     
 

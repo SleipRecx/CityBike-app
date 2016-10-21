@@ -1,27 +1,21 @@
 PODS:
-  - Alamofire (3.4.0)
+  - Alamofire (4.0.1)
   - KeepBackgroundCell (0.2.0)
-  - SwiftyJSON (2.3.2)
+  - SwiftyJSON (3.0.0)
+  - UserTrackingButton (0.1.1)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.4)
+  - Alamofire (~> 4.0)
   - KeepBackgroundCell
-  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
-
-EXTERNAL SOURCES:
-  SwiftyJSON:
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
-
-CHECKOUT OPTIONS:
-  SwiftyJSON:
-    :commit: 2a5b70f06001316d4fb54501edc70b4084705da0
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+  - SwiftyJSON (= 3.0.0)
+  - UserTrackingButton
 
 SPEC CHECKSUMS:
-  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
   KeepBackgroundCell: d8f02dbb2bb99f2fcd21b3ab94516c4d54208989
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
+  UserTrackingButton: 0b45c36c0547deb58739d182801aaf30ae7831ee
 
-PODFILE CHECKSUM: 18e9c10466599d374092438eb710f57c7e93991e
+PODFILE CHECKSUM: 509b5f767a1824ae71540a9abdb7345f4c00960a
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.rc.2

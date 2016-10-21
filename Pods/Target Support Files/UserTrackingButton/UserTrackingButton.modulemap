@@ -1,0 +1,6 @@
+framework module UserTrackingButton {
+  umbrella header "UserTrackingButton-umbrella.h"
+
+  export *
+  module * { export * }
+}

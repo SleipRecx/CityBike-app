@@ -15,13 +15,11 @@
 		226C5B5C1D032A0800AE3015 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2274E6011CD8ECC500BA002F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2274E6001CD8ECC500BA002F /* MapViewController.swift */; };
 		22965D801CE14B340031F735 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22965D7F1CE14B340031F735 /* CustomCell.swift */; };
-		22BC523B1D0765ED00256418 /* Pods_Bysykkel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43964A5C70BB4F7FBE97BE0 /* Pods_Bysykkel.framework */; };
-		22BC523F1D0765ED00256418 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BC523C1D0765ED00256418 /* Alamofire.framework */; };
-		22BC52401D0765ED00256418 /* KeepBackgroundCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BC523D1D0765ED00256418 /* KeepBackgroundCell.framework */; };
-		22BC52411D0765ED00256418 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BC523E1D0765ED00256418 /* SwiftyJSON.framework */; };
+		22BA81A81D9DCD6500EA975D /* mockup-data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 22BA81A71D9DCD6500EA975D /* mockup-data.txt */; };
 		22D8345F1CD8A21800B4AD1D /* BikePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8345E1CD8A21800B4AD1D /* BikePlace.swift */; };
 		22F933F81D06D5010044C72B /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F933F71D06D5010044C72B /* CustomAnnotation.swift */; };
 		22F933FC1D06E76C0044C72B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F933FB1D06E76C0044C72B /* TableViewController.swift */; };
+		A9498C2B3223AD52A7ACBCAF /* Pods_Bysykkel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EA8A6E963888941ED5A33C7 /* Pods_Bysykkel.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,8 +37,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		224FCEA31D031E970080A306 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Bysykkel-hjzkmfjejcyjzyguoeqlydtkeoxx/Build/Products/Debug-iphonesimulator/Alamofire.framework"; sourceTree = "<group>"; };
-		224FCEA41D031E970080A306 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Bysykkel-hjzkmfjejcyjzyguoeqlydtkeoxx/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		1246EC06C8243E865091B39F /* Pods-Bysykkel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bysykkel.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bysykkel/Pods-Bysykkel.release.xcconfig"; sourceTree = "<group>"; };
+		1EA8A6E963888941ED5A33C7 /* Pods_Bysykkel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bysykkel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22609D191D046A860042B98E /* FavoritesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 		22667CA31CD7BEE2005F3D66 /* Bysykkel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bysykkel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22667CA61CD7BEE2005F3D66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -50,15 +48,11 @@
 		22667CB21CD7BEE2005F3D66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2274E6001CD8ECC500BA002F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		22965D7F1CE14B340031F735 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
-		22BC523C1D0765ED00256418 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Bysykkel-hjzkmfjejcyjzyguoeqlydtkeoxx/Build/Products/Debug-iphoneos/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
-		22BC523D1D0765ED00256418 /* KeepBackgroundCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeepBackgroundCell.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Bysykkel-hjzkmfjejcyjzyguoeqlydtkeoxx/Build/Products/Debug-iphoneos/KeepBackgroundCell/KeepBackgroundCell.framework"; sourceTree = "<group>"; };
-		22BC523E1D0765ED00256418 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Bysykkel-hjzkmfjejcyjzyguoeqlydtkeoxx/Build/Products/Debug-iphoneos/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		22BA81A71D9DCD6500EA975D /* mockup-data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "mockup-data.txt"; sourceTree = "<group>"; };
 		22D8345E1CD8A21800B4AD1D /* BikePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikePlace.swift; sourceTree = "<group>"; };
 		22F933F71D06D5010044C72B /* CustomAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		22F933FB1D06E76C0044C72B /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		75DE5B18AFA64E525D7850BC /* Pods-Bysykkel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bysykkel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bysykkel/Pods-Bysykkel.debug.xcconfig"; sourceTree = "<group>"; };
-		AF8BDF4A6972665F1B2A8477 /* Pods-Bysykkel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bysykkel.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bysykkel/Pods-Bysykkel.release.xcconfig"; sourceTree = "<group>"; };
-		D43964A5C70BB4F7FBE97BE0 /* Pods_Bysykkel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bysykkel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADDB3E598E7991D17EFE0A3E /* Pods-Bysykkel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bysykkel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bysykkel/Pods-Bysykkel.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,25 +60,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22BC523F1D0765ED00256418 /* Alamofire.framework in Frameworks */,
-				22BC52401D0765ED00256418 /* KeepBackgroundCell.framework in Frameworks */,
-				22BC52411D0765ED00256418 /* SwiftyJSON.framework in Frameworks */,
-				22BC523B1D0765ED00256418 /* Pods_Bysykkel.framework in Frameworks */,
+				A9498C2B3223AD52A7ACBCAF /* Pods_Bysykkel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		03FAF73D6AC2AC710F284292 /* Frameworks */ = {
+		00C7C60B565823825503054E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				22BC523C1D0765ED00256418 /* Alamofire.framework */,
-				22BC523D1D0765ED00256418 /* KeepBackgroundCell.framework */,
-				22BC523E1D0765ED00256418 /* SwiftyJSON.framework */,
-				224FCEA31D031E970080A306 /* Alamofire.framework */,
-				224FCEA41D031E970080A306 /* SwiftyJSON.framework */,
-				D43964A5C70BB4F7FBE97BE0 /* Pods_Bysykkel.framework */,
+				ADDB3E598E7991D17EFE0A3E /* Pods-Bysykkel.debug.xcconfig */,
+				1246EC06C8243E865091B39F /* Pods-Bysykkel.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		1EC26E1F5BB0E3488E0CDA42 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1EA8A6E963888941ED5A33C7 /* Pods_Bysykkel.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -95,6 +90,7 @@
 				22D8345E1CD8A21800B4AD1D /* BikePlace.swift */,
 				22965D7F1CE14B340031F735 /* CustomCell.swift */,
 				22F933F71D06D5010044C72B /* CustomAnnotation.swift */,
+				22BA81A71D9DCD6500EA975D /* mockup-data.txt */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -123,8 +119,8 @@
 			children = (
 				22667CA51CD7BEE2005F3D66 /* Bysykkel */,
 				22667CA41CD7BEE2005F3D66 /* Products */,
-				03FAF73D6AC2AC710F284292 /* Frameworks */,
-				E1C791294E6B00541E6D64D5 /* Pods */,
+				00C7C60B565823825503054E /* Pods */,
+				1EC26E1F5BB0E3488E0CDA42 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -155,15 +151,6 @@
 				2274E6001CD8ECC500BA002F /* MapViewController.swift */,
 			);
 			name = Controller;
-			sourceTree = "<group>";
-		};
-		E1C791294E6B00541E6D64D5 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				75DE5B18AFA64E525D7850BC /* Pods-Bysykkel.debug.xcconfig */,
-				AF8BDF4A6972665F1B2A8477 /* Pods-Bysykkel.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,11 +184,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Markus Andresen";
 				TargetAttributes = {
 					22667CA21CD7BEE2005F3D66 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = S5H69846BK;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -236,6 +225,7 @@
 				22667CB11CD7BEE2005F3D66 /* LaunchScreen.storyboard in Resources */,
 				22667CAE1CD7BEE2005F3D66 /* Assets.xcassets in Resources */,
 				22667CAC1CD7BEE2005F3D66 /* Main.storyboard in Resources */,
+				22BA81A81D9DCD6500EA975D /* mockup-data.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +274,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -340,8 +330,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -385,8 +377,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -406,35 +400,50 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		22667CB61CD7BEE2005F3D66 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 75DE5B18AFA64E525D7850BC /* Pods-Bysykkel.debug.xcconfig */;
+			baseConfigurationReference = ADDB3E598E7991D17EFE0A3E /* Pods-Bysykkel.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = S5H69846BK;
 				INFOPLIST_FILE = Bysykkel/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.markus.Bysykkel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markus.bysykkel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		22667CB71CD7BEE2005F3D66 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF8BDF4A6972665F1B2A8477 /* Pods-Bysykkel.release.xcconfig */;
+			baseConfigurationReference = 1246EC06C8243E865091B39F /* Pods-Bysykkel.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = S5H69846BK;
 				INFOPLIST_FILE = Bysykkel/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.markus.Bysykkel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markus.bysykkel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -23,7 +23,7 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     @IBOutlet weak var mySegmentedControl: UISegmentedControl!
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
-    let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appdelegate = UIApplication.shared.delegate as! AppDelegate
    
     var places: [BikePlace] = []
     var filteredPlaces: [BikePlace] = []
@@ -31,87 +31,124 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.white
     
-        let searchBarItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(TableViewController.searchPressed))
-        searchBarItem.tintColor = UIColor.whiteColor()
+        let searchBarItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(TableViewController.searchPressed))
+        searchBarItem.tintColor = UIColor.white
         navigationItem.rightBarButtonItem = searchBarItem
+        
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
+    
         self.resultController.tableView.dataSource = self
         self.resultController.tableView.delegate = self
         self.refreshControl = self.refreshController
-        self.refreshController.addTarget(self, action: #selector(TableViewController.refreshTable), forControlEvents: .ValueChanged)
+        let string = "Dra for å oppdatere"
+        let myAttrString = NSAttributedString(string: string, attributes: nil)
+        self.refreshController.attributedTitle = myAttrString
+        self.refreshController.addTarget(self, action: #selector(TableViewController.refreshTable), for: .valueChanged)
         
         self.searchController = UISearchController(searchResultsController: self.resultController)
         self.searchController.dimsBackgroundDuringPresentation = true
         self.searchController.searchResultsUpdater = self
         self.searchController.searchBar.barTintColor = UIColor(red: 170/255, green: 50/255, blue: 50/255, alpha: 1.0)
-        self.searchController.searchBar.tintColor = UIColor.whiteColor()
+        self.searchController.searchBar.tintColor = UIColor.white
         definesPresentationContext = true
         
-        if CLLocationManager.locationServicesEnabled() {
-            switch(CLLocationManager.authorizationStatus()) {
-            case .NotDetermined, .Restricted, .Denied:
-                locationManager.requestWhenInUseAuthorization()
-            default:
-               fetchJSON()
-            }
-        }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        appdelegate.shouldSupportAllOrientation = false
-        let value = UIInterfaceOrientation.Portrait.rawValue
-        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        refreshTable()
     }
+    
 
+    func checkIfLocationEnabled(){
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse, .authorizedAlways:
+            break
+        case .notDetermined:
+            locationManager.requestAlwaysAuthorization()
+        case .restricted, .denied:
+           askForLocationInSettings()
+        }
+
+    }
     
-    func fetchJSON(){
-        let API_URL: String = "http://map.webservice.sharebike.com:8888/json/MapService/LiveStationData?APIKey=" +
-        "3EFC0CF3-4E99-40E2-9E42-B95C2EDE6C3C&SystemID=citytrondheim"
-        let myLocation = locationManager.location!
-        Alamofire.request(.GET, API_URL).validate().responseJSON { response in
-            switch response.result {
-            case .Success:
-                if let value = response.result.value {
-                    let json = JSON(value)
-                    let array = json["result"]["LiveStationData"].arrayValue
-                    for place in array{
-                        var online:Bool =  place["Online"].boolValue
-                        let longitude: Double = place["Longitude"].doubleValue
-                        let latitude: Double = place["Latitude"].doubleValue
-                        let location = CLLocation(latitude: latitude, longitude: longitude)
-                        let distance = Int((myLocation.distanceFromLocation(location)))
-                        var adress = place["Address"].stringValue
-                        let bikes = place["AvailableBikeCount"].intValue
-                        let slots = place["AvailableSlotCount"].intValue
-                        if(adress.containsString("[Offline]")){
-                            online = false
-                            adress = adress.componentsSeparatedByString(" ")[1]
-                        }
-                        let object = BikePlace(availableBikes: bikes,availableSlots: slots, adress: adress,online: online,location: location, distance: distance)
-                        self.places.append(object)
-                    }
-                    self.fetchFavorites()
-                    self.places.sortInPlace({$0.distance < $1.distance})
-                    self.tableView.reloadData()
-                    
-                }
-            case
-            .Failure(let error):
-                print(error)
-            }
+    func askForLocationInSettings(){
+        let alertController = UIAlertController(
+            title: "Stedstjenester avskrudd",
+            message: "For at appen skal fungerer må du skru på stedstjenester i innstillinger.",
+            preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Avbryt", style: .cancel){ (action) in
+            self.refreshControl?.endRefreshing()
         }
         
+        alertController.addAction(cancelAction)
+        let openAction = UIAlertAction(title: "Åpne Innstillinger", style: .default) { (action) in
+            if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.openURL(url as URL)
+            }
+             self.refreshControl?.endRefreshing()
+        }
+        alertController.addAction(openAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        appdelegate.shouldSupportAllOrientation = false
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        
+    }
+    
+
+    func fetchJSON(){
+            let API_URL: String = "http://map.webservice.sharebike.com:8888/json/MapService/LiveStationData?APIKey=" +
+            "3EFC0CF3-4E99-40E2-9E42-B95C2EDE6C3C&SystemID=citytrondheim"
+            let myLocation = locationManager.location!
+            Alamofire.request(API_URL).validate().responseJSON { response in
+                switch response.result {
+                case .success:
+                    if let value = response.result.value {
+                        let json = JSON(value)
+                        let array = json["result"]["LiveStationData"].arrayValue
+                        for place in array{
+                            var online:Bool =  place["Online"].boolValue
+                            let longitude: Double = place["Longitude"].doubleValue
+                            let latitude: Double = place["Latitude"].doubleValue
+                            let location = CLLocation(latitude: latitude, longitude: longitude)
+                            let distance = Int((myLocation.distance(from: location)))
+                            var adress = place["Address"].stringValue
+                            let bikes = place["AvailableBikeCount"].intValue
+                            let slots = place["AvailableSlotCount"].intValue
+                            if(adress.contains("[Offline]")){
+                                online = false
+                                adress = adress.components(separatedBy: " ")[1]
+                            }
+                            let object = BikePlace(availableBikes: bikes,availableSlots: slots, adress: adress,online: online,location: location, distance: distance)
+                            self.places.append(object)
+                        }
+                        self.fetchFavorites()
+                        self.places.sort(by: {$0.distance < $1.distance})
+                        self.tableView.reloadData()
+                        
+                    }
+                default:
+                    break
+                }
+            
+        }
     }
     
   
@@ -120,14 +157,14 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         for favorite in favorites{
             tmp = tmp + String(favorite.id) + ","
         }
-        NSUserDefaults.standardUserDefaults().setObject(tmp, forKey: "favorites")
+        UserDefaults.standard.set(tmp, forKey: "favorites")
     }
     
     
     func fetchFavorites(){
         var favoritesID : [Int] = []
-        if( NSUserDefaults.standardUserDefaults().objectForKey("favorites") != nil) {
-            let favString = NSUserDefaults.standardUserDefaults().objectForKey("favorites")! as! String
+        if( UserDefaults.standard.object(forKey: "favorites") != nil) {
+            let favString = UserDefaults.standard.object(forKey: "favorites")! as! String
             let tmp = favString.characters.split{$0 == ","}.map(String.init)
             for string in tmp{
                 favoritesID.append(Int(string)!)
@@ -138,52 +175,51 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
                 favorites.append(place)
             }
         }
-        favorites.sortInPlace({$0.distance < $1.distance})
+        favorites.sort(by: {$0.distance < $1.distance})
     }
     
 
     
     // IBAction Methods
-    
-    @IBAction func mySegmentedControlPressed(sender: AnyObject) {
+    @IBAction func mySegmentedControlPressed(_ sender: AnyObject) {
         if(mySegmentedControl.selectedSegmentIndex == 1){
-            let addBarItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(TableViewController.performPopover))
-            addBarItem.tintColor = UIColor.whiteColor()
+            let addBarItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(TableViewController.performPopover))
+            addBarItem.tintColor = UIColor.white
             navigationItem.rightBarButtonItem = addBarItem
         }
         else{
-            let searchBarItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(TableViewController.searchPressed))
-            searchBarItem.tintColor = UIColor.whiteColor()
+            let searchBarItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(TableViewController.searchPressed))
+            searchBarItem.tintColor = UIColor.white
             navigationItem.rightBarButtonItem = searchBarItem
         }
         self.tableView.reloadData()
     }
     
     func searchPressed(){
-        self.presentViewController(searchController, animated: true, completion: nil)
+        self.present(searchController, animated: true, completion: nil)
     }
     
     
     
     // TableView Methods
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if(mySegmentedControl.selectedSegmentIndex == 1){
             return true
         }
         return false
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return getCurrentTableViewArray().count
     }
     
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let unFav = UITableViewRowAction(style: .Normal, title: "Fjern"){(
-            action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
-            self.favorites.removeAtIndex(self.favorites.indexOf(self.favorites[indexPath.row])!)
-            self.favorites.sortInPlace({$0.distance < $1.distance})
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let unFav = UITableViewRowAction(style: .normal, title: "Fjern"){(
+            action: UITableViewRowAction, indexPath: IndexPath!) -> Void in
+            self.favorites.remove(at: self.favorites.index(of: self.favorites[indexPath.row])!)
+            self.favorites.sort(by: {$0.distance < $1.distance})
             self.tableView.reloadData()
             self.saveFavorites()
         }
@@ -192,27 +228,27 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.rowHeight = 51
-        let cell:CustomCell = self.tableView.dequeueReusableCellWithIdentifier("myCell")! as! CustomCell
+        let cell:CustomCell = self.tableView.dequeueReusableCell(withIdentifier: "myCell")! as! CustomCell
         let array: [BikePlace] = self.getCurrentTableViewArray()
-        cell.id = array[indexPath.row].id
-        cell.img.backgroundColor = array[indexPath.row].getColorCode()
-        cell.accessoryType = UITableViewCellAccessoryType.None
+        cell.id = array[(indexPath as NSIndexPath).row].id
+        cell.img.backgroundColor = array[(indexPath as NSIndexPath).row].getColorCode()
         let bgColorView = UIView()
         bgColorView.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1.0)
         cell.selectedBackgroundView = bgColorView
-        addExtraMarks(cell, place: array[indexPath.row])
+        addExtraMarks(cell, place: array[(indexPath as NSIndexPath).row])
         return cell
         
     }
     
     // TableView support methods
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        searchActive = searchController.active
+    func updateSearchResults(for searchController: UISearchController) {
+        searchActive = searchController.isActive
         self.filteredPlaces =  self.places.filter {place -> Bool in
-            if place.getDisplayString().lowercaseString.containsString(self.searchController.searchBar.text!.lowercaseString){
+            if place.getDisplayString().lowercased().contains(self.searchController.searchBar.text!.lowercased()){
                 return true
             }
             else{
@@ -224,15 +260,29 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     
     
     func refreshTable(){
-        self.refreshControl?.beginRefreshing()
-        self.places.removeAll()
-        self.filteredPlaces.removeAll()
-        self.favorites.removeAll()
-        fetchJSON()
-        self.tableView.reloadData()
-        self.refreshController.endRefreshing()
+        let status = CLLocationManager.authorizationStatus()
+        if(status == .authorizedWhenInUse ){
+            self.places.removeAll()
+            self.filteredPlaces.removeAll()
+            self.favorites.removeAll()
+            self.refreshControl?.beginRefreshing()
+            fetchJSON()
+            self.tableView.reloadData()
+            self.refreshController.endRefreshing()
+        }
+        else if(status == .notDetermined){
+            //nothing
+        }
+        else{
+            self.places.removeAll()
+            self.filteredPlaces.removeAll()
+            self.favorites.removeAll()
+            self.tableView.reloadData()
+            askForLocationInSettings()
+        }
+       
     }
-    
+  
     
     
     func getCurrentTableViewArray()->[BikePlace]{
@@ -249,10 +299,10 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     }
     
     
-    func addExtraMarks(cell: CustomCell, place: BikePlace){
-        let hour = NSCalendar.currentCalendar().component(.Hour, fromDate: NSDate())
+    func addExtraMarks(_ cell: CustomCell, place: BikePlace){
+        let hour = (Calendar.current as NSCalendar).component(.hour, from: Date())
         if hour < 6{
-            cell.one.text = place.getDisplayString() + " [Stengt]"
+            cell.one.text = place.getDisplayString()  // stengt
         }
             
         else{
@@ -260,29 +310,34 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
         }
         
         if(place.distance > 10000){
-            cell.two.text = String(place.distance/1000) +
-                " Kilometer"  + " - Stativer: " + String(place.availableSlots) +  " - Sykler: " + String(place.availableBikes)
+            cell.two.text = String(place.distance/1000) + " Kilometer"
         }
         else{
             cell.two.text = String(place.distance) +
-                " Meter"  + " - Stativer: " + String(place.availableSlots) +  " - Sykler: " + String(place.availableBikes)
+                " Meter"
         }
+        
+        cell.three.text =   String(place.availableBikes)
+        cell.four.text! =  String(place.availableSlots)
+    
+        
+       
         
     }
     
-    // Transfer data between Views
+    // Transfer data between v iews
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "mySegue"){
             let cell = sender as? CustomCell
-            let index = self.places.indexOf({$0.id == cell!.id})!
-            let secondViewController = segue.destinationViewController as! MapViewController
+            let index = self.places.index(where: {$0.id == cell!.id})!
+            let secondViewController = segue.destination as! MapViewController
             secondViewController.currentPlace.append(self.places[index])
             secondViewController.places = self.places
         }
             
         else{
-            let secondViewController = segue.destinationViewController as! MapViewController
+            let secondViewController = segue.destination as! MapViewController
             secondViewController.places = self.places
         }
     }
@@ -290,7 +345,7 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
     
     func performPopover(){
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewControllerWithIdentifier("FavoritesViewController") as! UINavigationController
+        let controller = storyboard.instantiateViewController(withIdentifier: "FavoritesViewController") as! UINavigationController
         let  destinationController = controller.topViewController as! FavoritesController
         destinationController.currentFavorites = self.favorites
         destinationController.places = self.places
@@ -303,7 +358,7 @@ class TableViewController: UITableViewController, UISearchResultsUpdating, CLLoc
                 self!.tableView.reloadData()
             }
         }
-        self.presentViewController(controller, animated: true, completion: nil)
+        self.present(controller, animated: true, completion: nil)
     }
     
   

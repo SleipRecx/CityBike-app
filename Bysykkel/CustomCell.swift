@@ -15,6 +15,10 @@ class CustomCell: UITableViewCell {
     @IBOutlet weak var two: UILabel!
     @IBOutlet weak var one: UILabel!
     var id = -1
+    @IBOutlet weak var lock: UILabel!
+    
+    @IBOutlet weak var four: UILabel!
+    @IBOutlet weak var three: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +28,7 @@ class CustomCell: UITableViewCell {
        
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }

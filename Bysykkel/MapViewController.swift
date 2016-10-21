@@ -13,9 +13,14 @@ import Alamofire
 import SwiftyJSON
 
 
+
+
 class MapViewController: UIViewController, MKMapViewDelegate {
 
+    
+
     @IBOutlet weak var map: MKMapView!
+    
     let locationManager = CLLocationManager()
     var places: [BikePlace] = []
     var currentPlace: [BikePlace] = []
@@ -23,18 +28,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
         appdelegate.shouldSupportAllOrientation = true
         
         map.delegate = self
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         populateMap()
         if(currentPlace.count > 0){
             selectAnnotation()
         }
         else{
             let location = CLLocationCoordinate2D(latitude:  63.426637, longitude: 10.392981)
-            let span = MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
+            let span = MKCoordinateSpan(latitudeDelta: 0.06, longitudeDelta: 0.06)
             let region = MKCoordinateRegion(center: location, span:  span)
             map.setRegion(region, animated: true)
 
@@ -60,21 +65,47 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
 
-    @IBAction func refreshPressed(sender: AnyObject) {
-        let annotationsToRemove = map.annotations
-        map.removeAnnotations(annotationsToRemove)
-        fetchJSON()
+    @IBAction func refreshPressed(_ sender: AnyObject) {
+        let status = CLLocationManager.authorizationStatus()
+        if(status == .authorizedWhenInUse){
+            let annotationsToRemove = map.annotations
+            map.removeAnnotations(annotationsToRemove)
+            fetchJSON()
+        }
+        else{
+            askForLocationInSettings()
+        }
+
+    }
+    
+    
+    func askForLocationInSettings(){
+        let alertController = UIAlertController(
+            title: "Stedstjenester avskrudd",
+            message: "For at appen skal fungerer må du skru på stedstjenester i innstillinger.",
+            preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Avbryt", style: .cancel)
+        alertController.addAction(cancelAction)
+        let openAction = UIAlertAction(title: "Åpne Innstillinger", style: .default) { (action) in
+            if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.openURL(url as URL)
+            }
+        }
+        alertController.addAction(openAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             return nil
         }
         
         let reuseId = "pin"
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         let colorPointAnnotation = annotation as! CustomAnnotation
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
@@ -85,7 +116,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
         pinView!.canShowCallout = true
         pinView?.animatesDrop = true
-        pinView?.pinTintColor = colorPointAnnotation.pinColor
+        if #available(iOS 9.0, *) {
+            pinView?.pinTintColor = colorPointAnnotation.pinColor
+        } else {
+            // Fallback on earlier versions
+        }
         return pinView
     }
     
@@ -133,7 +168,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             //annotation.pinCustomImageName = "test"
             annotation.coordinate = location.coordinate
             annotation.title = place.adress
-            annotation.subtitle = "Sykler: " + String(place.availableBikes) + " Låser: " + String(place.availableSlots)
+            annotation.subtitle = "Ledig:   🚲 " + String(place.availableBikes) + "     🔓 " + String(place.availableSlots)
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
             self.map.addAnnotation(annotationView.annotation!)
            
@@ -145,9 +180,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let API_URL: String = "http://map.webservice.sharebike.com:8888/json/MapService/LiveStationData?APIKey=" +
         "3EFC0CF3-4E99-40E2-9E42-B95C2EDE6C3C&SystemID=citytrondheim"
         let myLocation = locationManager.location!
-        Alamofire.request(.GET, API_URL).validate().responseJSON { response in
+        Alamofire.request(API_URL).validate().responseJSON { response in
             switch response.result {
-            case .Success:
+            case .success:
                 if let value = response.result.value {
                     let json = JSON(value)
                     let array = json["result"]["LiveStationData"].arrayValue
@@ -156,13 +191,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         let longitude: Double = place["Longitude"].doubleValue
                         let latitude: Double = place["Latitude"].doubleValue
                         let location = CLLocation(latitude: latitude, longitude: longitude)
-                        let distance = Int((myLocation.distanceFromLocation(location)))
+                        let distance = Int((myLocation.distance(from: location)))
                         var adress = place["Address"].stringValue
                         let bikes = place["AvailableBikeCount"].intValue
                         let slots = place["AvailableSlotCount"].intValue
-                        if(adress.containsString("[Offline]")){
+                        if(adress.contains("[Offline]")){
                             online = false
-                            adress = adress.componentsSeparatedByString(" ")[1]
+                            adress = adress.components(separatedBy: " ")[1]
                         }
                         let object = BikePlace(availableBikes: bikes,availableSlots: slots, adress: adress,online: online,location: location, distance: distance)
                         self.places.append(object)
@@ -175,7 +210,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     }
                 }
             case
-            .Failure(let error):
+            .failure(let error):
                 print(error)
             }
         }
